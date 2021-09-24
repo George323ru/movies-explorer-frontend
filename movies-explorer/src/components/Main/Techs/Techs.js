@@ -2,21 +2,24 @@ import './Techs.css';
 
 const Techs = () => {
   return (
-    <footer className="footer">
-      <div className="footer__container">
-        <h3 className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</h3>
-        <nav className="footer__navigation">
-          <div className="footer__copyright">
-            &copy;&nbsp;{new Date().getFullYear()}
-          </div>
-          <ul className="footer__links">
-            <li className="footer__item"><a className="footer__link" href='https://practicum.yandex.ru' target="_blank" rel="noopener">Яндекс.Практикум</a></li>
-            <li className="footer__item"><a className="footer__link" href='https://github.com/George323ru' target="_blank" rel="noopener">Github</a></li>
-            <li className="footer__item"><a className="footer__link" href='https://ru-ru.facebook.com' target="_blank" rel="noopener">Facebook</a></li>
+    <section className="techs">
+      <div className="techs__container">
+        <h2 className="techs__title">Технологии</h2>
+        <div className="techs__main">
+          <p className="techs__subtitle">7 технологий</p>
+          <p className="techs__description">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+          <ul className="techs__list">
+            <li className="techs__item">HTML</li>
+            <li className="techs__item">CSS</li>
+            <li className="techs__item">JS</li>
+            <li className="techs__item">React</li>
+            <li className="techs__item">Git</li>
+            <li className="techs__item">Express.js</li>
+            <li className="techs__item">mongoDB</li>
           </ul>
-        </nav>
+        </div>
       </div>
-    </footer>
+    </section>
   )
 }
 
