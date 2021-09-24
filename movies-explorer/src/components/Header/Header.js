@@ -6,10 +6,10 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        <Link>
-          <img className="header__logo" src={logo} />
-        </Link>
+        <img className="header__logo" src={logo} />
       </div>
     </header>
   )
 }
+
+export default Header;
