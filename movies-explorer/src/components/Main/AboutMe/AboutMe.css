@@ -26,10 +26,14 @@
 }
 
 .about-me__presentation {
+  max-width: 600px;
+  padding-top: 66px;
   font-family: Inter, Arial, sans-serif;
 }
 
 .about-me__name {
+  margin: 0;
+  padding-bottom: 20px;
   font-weight: normal;
   font-size: 50px;
   line-height: 58px;
@@ -37,18 +41,23 @@
 }
 
 .about-me__job {
+  margin: 0;
+  padding-bottom: 26px;
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
 }
 
 .about-me__story {
+  margin: 0;
+  padding-bottom: 100px;
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
 }
 
 .about-me__link {
+  margin-right: 20px;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
