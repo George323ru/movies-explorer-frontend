@@ -4,7 +4,8 @@ import './App.css';
 import Header from '../Header/Header';
 import AboutProject from '../Main/AboutProject/AboutProject';
 import Techs from "../Main/Techs/Techs";
-import AboutMe from "../Main/AboutMe/AboutMe"
+import AboutMe from "../Main/AboutMe/AboutMe";
+import Portfolio from "../Main/Portfolio/Portfolio"
 // import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import Footer from '../Footer/Footer'
 
@@ -15,6 +16,7 @@ const App = () => {
       <AboutProject />
       <Techs />
       <AboutMe />
+      <Portfolio />
       { }
       <Footer />
     </div>
