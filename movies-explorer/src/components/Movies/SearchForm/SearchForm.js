@@ -5,6 +5,7 @@ const SearchForm = () => {
     <section className="search-form">
       <div className="search-form__container">
         <input className="search-form__input" placeholder="Фильм"></input>
+
       </div>
     </section>
   );
