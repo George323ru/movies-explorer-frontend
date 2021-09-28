@@ -1,4 +1,5 @@
 import "./Promo.css";
+import logoPromo from '../../../images/landing-logo.svg'
 
 const Promo = () => {
   return (
@@ -14,7 +15,7 @@ const Promo = () => {
           </p>
           <button className="promo__button">Узнать больше</button>
         </div>
-        <img src="../../../images/logo (2).svg"></img>
+        <img src={logoPromo} alt="Логотип"></img>
       </div>
     </section>
   );
