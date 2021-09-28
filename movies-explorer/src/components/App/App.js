@@ -5,7 +5,6 @@ import Header from '../Header/Header';
 import Promo from "../Main/Promo/Promo";
 import Movies from "../Movies/Movies";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import FilterCheckbox from "../Movies/FilterCheckbox/FilterCheckbox"
 import AboutProject from '../Main/AboutProject/AboutProject';
 import Techs from "../Main/Techs/Techs";
 import AboutMe from "../Main/AboutMe/AboutMe";
@@ -20,7 +19,6 @@ const App = () => {
       <Header />
       <Movies />
       <SearchForm />
-      <FilterCheckbox />
       <Promo />
       <AboutProject />
       <Techs />

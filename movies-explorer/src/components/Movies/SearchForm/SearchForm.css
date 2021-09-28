@@ -13,13 +13,16 @@
 
 .search-form__input {
   width: 100%;
+  margin-bottom: 35px;
+  padding-top: 6px;
+  padding-bottom: 14px;
+  background: url(../../../images/icon-find.svg) no-repeat center right;
+  background-size: 34px 34px;
   border: 0;
   font-style: normal;
   font-weight: 500;
   font-size: 28px;
   line-height: 34px;
-  padding-top: 6px;
-  padding-bottom: 14px;
   border-bottom: 1px solid #e8e8e8;
   outline: none;
 }
@@ -42,7 +45,7 @@
   opacity: 1;
   transition: opacity 0.2s ease;
   color: #a0a0a0;
-} /* Firefox 19+ */
+}
 .search-form__input:-moz-placeholder {
   font-style: normal;
   font-weight: 500;
@@ -51,7 +54,7 @@
   opacity: 1;
   transition: opacity 0.2s ease;
   color: #a0a0a0;
-} /* Firefox 18- */
+}
 .search-form__input:-ms-input-placeholder {
   font-style: normal;
   font-weight: 500;
@@ -77,4 +80,18 @@
 .search-form__input:focus:-ms-input-placeholder {
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+
+.search-form__checkbox-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.search-form__name-checkbox {
+  margin: 0;
+  margin-left: 15px;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
 }
