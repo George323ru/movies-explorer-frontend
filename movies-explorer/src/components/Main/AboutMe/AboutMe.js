@@ -11,8 +11,8 @@ const AboutMe = () => {
             <p className="about-me__job">Фронтенд-разработчик, 32 года</p>
             <p className="about-me__story">Учился год на фронтенд-разработчика в Яндекс.Практикуме. Сейчас ищу работу по этой специальности. Увлекаюсь когнитивыми науками, бегом и практиками осознанности. Работаю в типографии.</p>
             <div className="about-me__links">
-              <a className="about-me__link">Facebook</a>
-              <a className="about-me__link">Github</a>
+              <a className="about-me__link" href="https://ru-ru.facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+              <a className="about-me__link" href="https://github.com/George323ru" target="_blank" rel="noreferrer">Github</a>
             </div>
           </div>
           <div className="about-me__foto"></div>
