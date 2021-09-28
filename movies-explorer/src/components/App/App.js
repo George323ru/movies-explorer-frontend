@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import Promo from "../Main/Promo/Promo";
 import Movies from "../Movies/Movies";
 import MoviesCard from "../Movies/MoviesCard/MoviesCard";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import AboutProject from '../Main/AboutProject/AboutProject';
 import Techs from "../Main/Techs/Techs";
@@ -20,6 +21,7 @@ const App = () => {
       <Header />
       <Movies />
       <MoviesCard />
+      <MoviesCardList />
       <SearchForm />
       <Promo />
       <AboutProject />
