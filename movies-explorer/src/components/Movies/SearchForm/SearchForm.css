@@ -34,7 +34,7 @@
   line-height: 34px;
   opacity: 1;
   transition: opacity 0.2s ease;
-  color: #a0a0a0;
+  color: var(--main-color-text);
 }
 
 .search-form__input::-moz-placeholder {
@@ -44,7 +44,7 @@
   line-height: 34px;
   opacity: 1;
   transition: opacity 0.2s ease;
-  color: #a0a0a0;
+  color: var(--main-color-text);
 }
 .search-form__input:-moz-placeholder {
   font-style: normal;
@@ -53,7 +53,7 @@
   line-height: 34px;
   opacity: 1;
   transition: opacity 0.2s ease;
-  color: #a0a0a0;
+  color: var(--main-color-text);
 }
 .search-form__input:-ms-input-placeholder {
   font-style: normal;
@@ -62,7 +62,7 @@
   line-height: 34px;
   opacity: 1;
   transition: opacity 0.2s ease;
-  color: #a0a0a0;
+  color: var(--main-color-text);
 }
 
 .search-form__input:focus::-webkit-input-placeholder {

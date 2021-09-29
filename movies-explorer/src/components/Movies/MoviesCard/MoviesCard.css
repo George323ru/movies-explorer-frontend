@@ -26,7 +26,7 @@
   font-weight: normal;
   font-size: 13px;
   line-height: 18px;
-  color: #a0a0a0;
+  color: var(--main-color-text);
 }
 
 .movies-card__image {
@@ -37,7 +37,7 @@
   margin: 18px 130px;
   width: 100px;
   height: 29px;
-  background: #ee3465;
+  background: var(--main-color-accent);
   border-radius: 30px;
   border: none;
   cursor: pointer;

@@ -69,13 +69,13 @@
 .about-project__timeline-part-first {
   margin: 0;
   padding: 10px 0 10px 0;
-  background-color: #2be080;
+  background-color: var(--main-color-third);
 }
 
 .about-project__timeline-caption {
   margin: 0;
   padding-top: 15px;
-  color: #a0a0a0;
+  color: var(--main-color-text);
   font-weight: 500;
 }
 
