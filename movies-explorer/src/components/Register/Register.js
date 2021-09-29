@@ -6,7 +6,7 @@ const Register = () => {
     <section className="authorization">
       <div className="authorization__container">
         <form className="authorization__form">
-          <h3 className="authorization__titile">Добро пожаловать!</h3>
+          <h3 className="authorization__title">Добро пожаловать!</h3>
           <label className="authorization__label" for="name">Имя</label>
           <input
             type='text'

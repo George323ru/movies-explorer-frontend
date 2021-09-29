@@ -6,7 +6,7 @@ const Login = () => {
     <section className="authorization">
       <div className="authorization__container">
         <form className="authorization__form">
-          <h3 className="authorization__titile">Рады видеть!</h3>
+          <h3 className="authorization__title">Рады видеть!</h3>
           <label className="authorization__label" for="email">E-mail</label>
           <input
             type='email'
