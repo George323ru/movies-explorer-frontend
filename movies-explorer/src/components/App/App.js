@@ -15,7 +15,6 @@ const App = () => {
   return (
     <div className="page">
       <Header />
-      <Profile />
       <Switch>
         <Route exact path='/'>
           <Main />
@@ -23,13 +22,16 @@ const App = () => {
         <Route path='/movies'>
           <Movies />
         </Route>
+        <Route path='/profile'>
+          <Profile />
+        </Route>
         <Route path='/sign-in'>
           <Login />
         </Route>
         <Route path='/sign-up'>
           <Register />
         </Route>
-        <Route path="*">
+        <Route path='*'>
           <NotFoundPage />
         </Route>
       </Switch>
