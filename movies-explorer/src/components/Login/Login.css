@@ -1,6 +1,6 @@
 .authorization {
   width: 100%;
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--main-font-family);
   padding-top: 60px;
 }
 

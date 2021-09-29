@@ -13,7 +13,7 @@
   margin: 0;
   padding-bottom: 23px;
   text-align: left;
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--main-font-family);
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
@@ -23,7 +23,7 @@
 .portfolio__products {
   padding: 0;
   list-style: none;
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--main-font-family);
   font-size: 30px;
   line-height: 50px;
 

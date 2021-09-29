@@ -1,7 +1,7 @@
 .promo {
   width: 100%;
   background-color: var(--main-color-first);
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--main-font-family);
 }
 
 .promo__container {

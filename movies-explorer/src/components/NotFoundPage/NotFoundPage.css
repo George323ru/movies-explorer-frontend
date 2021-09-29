@@ -3,7 +3,7 @@
   max-width: 1140px;
   min-width: 320px;
   text-align: center;
-  font-family: Inter, Arial, sans-serif;
+  font-family: var(--main-font-family);
 }
 
 .not-found-page__title {
