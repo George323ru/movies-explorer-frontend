@@ -1,22 +1,39 @@
 import "./MoviesCard.css";
 import "./_active/movies-card_active.css"
 import moviesPic from "../../../images/card-pic.png"
-import { useState } from "react";
-import iconSave from "../../../images/icon-save.svg"
+import { useEffect, useState } from "react";
+import iconSave from "../../../images/icon-save.svg";
+import iconDeleteCard from "../../../images/icon-delete.svg";
+import { useLocation } from "react-router";
 
 const MoviesCard = () => {
 
-  const [clickSaveButton, setClickSaveButton] = useState('Сохранить');
+  const { pathname } = useLocation();
+
+  const [clickSaveButton, setClickSaveButton] = useState('');
   const [saveButtonColor, setSaveButtonColor] = useState(false);
 
-  const handltClickSaveButton = () => {
-    clickSaveButton === 'Сохранить'
-      ? setClickSaveButton((<img className="movies-card__button-icon" src={iconSave} alt="Кнопка сохранения карточки"></img>))
-      : setClickSaveButton('Сохранить');
+  useEffect(() => {
+    if (pathname === "/saved-movies") {
+      setClickSaveButton((<img className="movies-card__button-icon" src={iconDeleteCard} alt="Кнопка сохранения карточки"></img>));
+    } else {
+      setClickSaveButton('Сохранить')
+    }
+  }, []);
 
-    saveButtonColor
-      ? setSaveButtonColor(false)
-      : setSaveButtonColor(true)
+  const handltClickSaveButton = () => {
+    if (pathname === "/saved-movies") {
+      setClickSaveButton((<img className="movies-card__button-icon" src={iconDeleteCard} alt="Кнопка сохранения карточки"></img>));
+    } else {
+      clickSaveButton === 'Сохранить'
+        ? setClickSaveButton((<img className="movies-card__button-icon" src={iconSave} alt="Кнопка сохранения карточки"></img>))
+        : setClickSaveButton('Сохранить');
+
+      saveButtonColor
+        ? setSaveButtonColor(false)
+        : setSaveButtonColor(true)
+    }
+
   }
 
   return (
