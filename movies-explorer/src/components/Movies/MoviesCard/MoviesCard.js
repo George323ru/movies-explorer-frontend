@@ -11,10 +11,12 @@ const MoviesCard = () => {
 
   const handltClickSaveButton = () => {
     clickSaveButton === 'Сохранить'
-      ? setClickSaveButton((<img src={iconSave}></img>))
+      ? setClickSaveButton((<img className="movies-card__button-icon" src={iconSave} alt="Кнопка сохранения карточки"></img>))
       : setClickSaveButton('Сохранить');
 
-    saveButtonColor ? setSaveButtonColor(false) : setSaveButtonColor(true)
+    saveButtonColor
+      ? setSaveButtonColor(false)
+      : setSaveButtonColor(true)
   }
 
   return (
