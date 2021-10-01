@@ -10,7 +10,9 @@ const MoviesCard = () => {
         <p className="movies-card__duration">27 минут</p>
       </div>
       <img className="movies-card__image" src={moviesPic} alt="Картика карточки"></img>
-      <button className="movies-card__button"></button>
+      <button className="movies-card__button">
+        Сохранить
+      </button>
     </section>
   );
 };
