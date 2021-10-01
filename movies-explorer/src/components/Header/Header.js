@@ -5,6 +5,7 @@ import './_width_small/header_width_small.css';
 import logo from '../../images/logo.svg'
 import Navigation from '../Navigation/Navigation';
 import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -25,7 +26,10 @@ const Header = () => {
   return (
     <header className={`header ${headerPadditgTop} ${backgroundActive} ${widthSmall}`}>
       <div className={`header__container`}>
-        <img className="header__logo" src={logo} alt="Логотип" />
+        <Link className="header__link-logo" to="/">
+          <img className="header__logo" src={logo} alt="Логотип" />
+        </Link>
+
         <Navigation />
       </div>
     </header>
