@@ -1,13 +1,13 @@
 .header {
   width: 100%;
-  background-color: var(--main-color-first);
+  margin: 0 auto;
 }
 
 .header__container {
   min-width: 320px;
   max-width: 1140px;
   box-sizing: border-box;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
