@@ -33,5 +33,5 @@
 }
 
 .movies-card-list__append-button:hover {
-  background-color: var(--main-color-third);
+  background-color: #e9e9e9;
 }
