@@ -44,4 +44,9 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 11px;
+  transition: background 0.2s ease-out;
+}
+
+.movies-card__button:hover {
+  background-color: #d1d1d165;
 }

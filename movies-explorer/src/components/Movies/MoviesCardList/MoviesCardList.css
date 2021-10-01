@@ -21,7 +21,7 @@
 .movies-card-list__append-button {
   width: 320px;
   height: 36px;
-  background-color: #f9f9f9;
+  background-color: var(--main-color-button);
   outline: none;
   border: none;
   border-radius: 6px;
