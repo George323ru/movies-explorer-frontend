@@ -19,7 +19,7 @@ const MoviesCard = () => {
     } else {
       setClickSaveButton('Сохранить')
     }
-  }, []);
+  }, [pathname]);
 
   const handltClickSaveButton = () => {
     if (pathname === "/saved-movies") {
