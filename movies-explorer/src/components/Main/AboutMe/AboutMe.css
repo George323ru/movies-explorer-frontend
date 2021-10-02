@@ -69,3 +69,10 @@
 .about-me__link:hover {
   color: #818181;
 }
+
+@media all and (max-width: 1200px) {
+  .about-me__container {
+    box-sizing: border-box;
+    padding: 90px 50px;
+  }
+}

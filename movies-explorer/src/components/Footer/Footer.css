@@ -12,12 +12,13 @@
 .footer__container {
   min-width: 320px;
   max-width: 1140px;
+  box-sizing: border-box;
+  padding: 80px 0 20px;
   margin: 0 auto;
 }
 
 .footer__title {
   margin: 0;
-  padding-top: 79px;
   padding-bottom: 20px;
   text-align: center;
   color: var(--main-color-text);
@@ -44,4 +45,10 @@
 .footer__link {
   color: black;
   text-decoration: none;
+}
+
+@media all and (max-width: 1200px) {
+  .footer__container {
+    padding: 80px 30px 20px;
+  }
 }

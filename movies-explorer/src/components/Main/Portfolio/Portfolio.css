@@ -22,6 +22,7 @@
 
 .portfolio__products {
   padding: 0;
+  margin: 0;
   list-style: none;
   font-family: var(--main-font-family);
   font-size: 30px;
@@ -67,12 +68,23 @@
   width: 100%;
 }
 
-/* .portfolio__link:hover {
-  color: #818181;
-  text-decoration: underline;
-} */
-
 .portfolio__image {
   width: 16px;
-  height: 17px;
+  height: 16px;
+}
+
+@media all and (max-width: 1200px) {
+  .portfolio__container {
+    box-sizing: border-box;
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__products {
+    font-size: 28px;
+  }
+
+  .portfolio__image {
+    width: 15px;
+    height: 15px;
+  }
 }
