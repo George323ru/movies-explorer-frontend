@@ -48,7 +48,29 @@
 .portfolio__link {
   text-decoration: none;
   color: #000000;
+  transition: color 0.2s ease-in-out;
 }
+
+.portfolio__link::after {
+  background-color: #000000; /* Цвет линии при наведении на нее курсора мыши */
+  display: block;
+  content: "";
+  height: 2px; /* Высота линии */
+  width: 0%;
+  -webkit-transition: width 0.2s ease-in-out;
+  -moz--transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
+}
+
+.portfolio__link:hover:after,
+.portfolio__link:focus:after {
+  width: 100%;
+}
+
+/* .portfolio__link:hover {
+  color: #818181;
+  text-decoration: underline;
+} */
 
 .portfolio__image {
   width: 16px;

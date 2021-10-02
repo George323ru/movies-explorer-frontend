@@ -63,4 +63,9 @@
   line-height: 17px;
   text-decoration: none;
   color: #000000;
+  transition: color 0.2s ease-in-out;
+}
+
+.about-me__link:hover {
+  color: #818181;
 }
