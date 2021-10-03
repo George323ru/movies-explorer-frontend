@@ -25,11 +25,13 @@ const Header = () => {
     ? "header_background_active"
     : ""}`
 
-  const widthSmall = `${pathname === "/sign-in" || pathname === "/sign-up"
+  const widthSmall = `${pathname === "/sign-in"
+    || pathname === "/sign-up"
     ? "header_width_small"
     : ""}`
 
-  const headerPadditgTop = `${pathname === "/sign-in" || pathname === "/sign-up"
+  const headerPadditgTop = `${pathname === "/sign-in"
+    || pathname === "/sign-up"
     ? "header_position_padding-top"
     : ""}`
 

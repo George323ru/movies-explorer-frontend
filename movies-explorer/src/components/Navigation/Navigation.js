@@ -46,7 +46,7 @@ const Navigation = () => {
         <li className="navigation__links-item">
           <Link className="navigation__profile-link" to="/profile">
             Аккаунт
-            <img className="navigation__accaunt-image" src={accauntLogo}></img>
+            <img className="navigation__accaunt-image" src={accauntLogo} alt="Логотип аккаунта"></img>
           </Link>
         </li>
       </ul>
