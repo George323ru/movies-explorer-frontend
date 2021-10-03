@@ -2,6 +2,7 @@
   width: 100%;
   font-family: var(--main-font-family);
   padding-top: 60px;
+  box-sizing: border-box;
 }
 
 .authorization__container {
@@ -17,6 +18,10 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
+}
+
+.authorization__input-wrap {
+  min-height: 266px;
 }
 
 .authorization__input {
@@ -84,4 +89,10 @@
   margin-left: 6px;
   color: var(--main-color-third);
   text-decoration: none;
+}
+
+@media all and (max-width: 1200px) {
+  .authorization {
+    padding-top: 36px;
+  }
 }
