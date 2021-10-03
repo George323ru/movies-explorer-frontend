@@ -3,14 +3,16 @@
 }
 
 .movies-card-list__container {
-  min-width: 320px;
-  max-width: 1140px;
-  padding-left: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 358px);
   gap: 32px;
-  list-style: none;
   margin: 0 auto;
+  min-width: 320px;
+  max-width: 1140px;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-left: 0;
+  list-style: none;
 }
 
 .movies-card-list__pagination {
@@ -34,4 +36,13 @@
 
 .movies-card-list__append-button:hover {
   background-color: #d1d1d165;
+}
+
+@media all and (max-width: 1200px) {
+  .movies-card-list__container {
+    padding: 70px 30px 30px;
+    grid-template-columns: repeat(auto-fill, 342px);
+    column-gap: 35px;
+    row-gap: 24px;
+  }
 }

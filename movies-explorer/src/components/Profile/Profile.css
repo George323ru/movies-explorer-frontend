@@ -4,6 +4,7 @@
 
 .profile__container {
   margin: 0 auto;
+  box-sizing: border-box;
   padding: 74px 0 70px;
   max-width: 1140px;
   min-width: 320px;
@@ -70,4 +71,18 @@
   text-align: center;
   text-decoration: none;
   color: var(--main-color-accent);
+}
+
+@media all and (max-width: 1200px) {
+  .profile__container {
+    padding: 236px 0 269px;
+  }
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+
+  .profile__button {
+    margin-top: 210px;
+  }
 }

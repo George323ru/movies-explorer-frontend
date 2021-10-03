@@ -19,6 +19,10 @@
   line-height: 29px;
 }
 
+.authorization__input-wrap {
+  min-height: 266px;
+}
+
 .authorization__input {
   width: 100%;
   box-sizing: border-box;
@@ -83,4 +87,10 @@
   margin-left: 6px;
   color: var(--main-color-third);
   text-decoration: none;
+}
+
+@media all and (max-width: 1200px) {
+  .authorization {
+    padding-top: 36px;
+  }
 }

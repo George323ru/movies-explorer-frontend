@@ -15,8 +15,6 @@ const MoviesCardList = () => {
         <li><Card /></li>
         <li><Card /></li>
         <li><Card /></li>
-        <li><Card /></li>
-        <li><Card /></li>
       </ul>
       <div className="movies-card-list__pagination">
         <button className="movies-card-list__append-button">

@@ -7,36 +7,38 @@ const Register = () => {
       <div className="authorization__container">
         <form className="authorization__form">
           <h3 className="authorization__title">Добро пожаловать!</h3>
-          <label className="authorization__label" for="name">Имя</label>
-          <input
-            type='text'
-            required
-            minLength='2'
-            maxLength='200'
-            name='text'
-            className='authorization__input'
-            id="name"
-          />
-          <label className="authorization__label" for="email">E-mail</label>
-          <input
-            type='email'
-            required
-            minLength='2'
-            maxLength='200'
-            name='email'
-            className='authorization__input'
-            id="email"
-          />
-          <label className="authorization__label" for="password">Пароль</label>
-          <input
-            type='password'
-            required
-            minLength='2'
-            maxLength='200'
-            name='password'
-            className='authorization__input'
-            id="password"
-          />
+          <div className="authorization__input-wrap">
+            <label className="authorization__label" for="name">Имя</label>
+            <input
+              type='text'
+              required
+              minLength='2'
+              maxLength='200'
+              name='text'
+              className='authorization__input'
+              id="name"
+            />
+            <label className="authorization__label" for="email">E-mail</label>
+            <input
+              type='email'
+              required
+              minLength='2'
+              maxLength='200'
+              name='email'
+              className='authorization__input'
+              id="email"
+            />
+            <label className="authorization__label" for="password">Пароль</label>
+            <input
+              type='password'
+              required
+              minLength='2'
+              maxLength='200'
+              name='password'
+              className='authorization__input'
+              id="password"
+            />
+          </div>
           <button className='authorization__button' type='submit'>
             Зарегистрироваться
           </button>
