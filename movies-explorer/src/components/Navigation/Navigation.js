@@ -1,9 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import "./Navigation.css";
-import "./_hidden/navigation_hidden.css"
+import "./_hidden/navigation_hidden.css";
+import "./_opened/navigation_opened.css";
 import accauntLogo from "../../images/icon-accaunt.svg";
+import { useEffect, useState } from "react";
 
 const Navigation = () => {
+
+  const [clickMenuBurger, setClickMenuBurger] = useState(false);
   const { pathname } = useLocation();
 
   const accauntLinksHidden = `${pathname === "/" ? "navigation_hidden" : ""}`;
@@ -20,9 +24,16 @@ const Navigation = () => {
     : ""
     }`;
 
-  const handleClickMenuBurger = () => {
+  const [hiddenLinkMain, setHiddenLinkMain] = useState(false);
 
-  }
+  const handleClickMenuBurger = () => {
+    if (clickMenuBurger) {
+      setClickMenuBurger(false); setHiddenLinkMain(false)
+    } else {
+      setClickMenuBurger(true);
+      setHiddenLinkMain(true)
+    }
+  };
 
   return (
     <nav className={`navigation ${navLinksHidden}`}>
@@ -49,7 +60,13 @@ const Navigation = () => {
           </Link>
         </li>
       </ul>
-      <ul className={`navigation__links ${accauntLinksHidden}`}>
+      <div className={`navigation__sublayer ${!clickMenuBurger ? "navigation_hidden" : ""}`}></div>
+      <ul className={`navigation__links ${accauntLinksHidden} ${clickMenuBurger ? "navigation_opened" : ""}`}>
+        <li className="navigation__links-item navigation_hidden-link">
+          <Link className="navigation__main-link">
+            Главная
+          </Link>
+        </li>
         <li className="navigation__links-item">
           <Link className="navigation__movies-link" to="/movies">
             Фильмы
@@ -65,7 +82,8 @@ const Navigation = () => {
           </Link>
         </li>
       </ul>
-    </nav>
+
+    </nav >
   );
 };
 
