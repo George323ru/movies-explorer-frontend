@@ -20,8 +20,23 @@ const Navigation = () => {
     : ""
     }`;
 
+  const handleClickMenuBurger = () => {
+
+  }
+
   return (
     <nav className={`navigation ${navLinksHidden}`}>
+
+      <div className="navigation__burger-button">
+        <input id="navigation__menu-toggle" type="checkbox" />
+        <label
+          onClick={handleClickMenuBurger}
+          className="navigation__menu-btn"
+          for="navigation__menu-toggle">
+          <span></span>
+        </label>
+      </div>
+
       <ul className={`navigation__links ${authLinksHidden}`}>
         <li className="navigation__links-item">
           <Link className="navigation__register-link" to="/sign-up">
