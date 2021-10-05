@@ -34,7 +34,7 @@
 }
 
 .movies-card__button {
-  margin: 18px 130px;
+  margin: 18px auto;
   width: 100px;
   height: 29px;
   background: var(--main-color-button);
@@ -49,4 +49,22 @@
 
 .movies-card__button:hover {
   background-color: #d1d1d165;
+}
+
+@media all and (max-width: 440px) {
+  .movies-card__title-wrap {
+    padding: 14px;
+  }
+
+  .movies-card__title {
+    font-size: 12px;
+  }
+
+  .movies-card__duration {
+    font-size: 10px;
+  }
+
+  .movies-card__button {
+    margin: 14px auto;
+  }
 }
