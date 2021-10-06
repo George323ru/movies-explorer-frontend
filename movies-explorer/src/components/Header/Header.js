@@ -54,8 +54,8 @@ const Header = () => {
     : ""}`
 
   return (
-    <header className={`header ${headerActive} ${headerPadditgTop} ${backgroundActive} ${widthSmall} ${headerPositionSticky} ${headerContentCenter}`}>
-      <div className={`header__container ${headerDeactivePadding}`}>
+    <header className={`header ${headerActive} ${headerPadditgTop} ${backgroundActive} ${widthSmall} ${headerPositionSticky} `}>
+      <div className={`header__container ${headerDeactivePadding} ${headerContentCenter}`}>
         <Link className="header__link-logo" to="/">
           <img className="header__logo" src={logo} alt="Логотип" />
         </Link>

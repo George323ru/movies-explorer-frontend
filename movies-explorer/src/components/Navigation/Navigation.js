@@ -24,14 +24,13 @@ const Navigation = () => {
     : ""
     }`;
 
-  const [hiddenLinkMain, setHiddenLinkMain] = useState(false);
+
 
   const handleClickMenuBurger = () => {
     if (clickMenuBurger) {
-      setClickMenuBurger(false); setHiddenLinkMain(false)
+      setClickMenuBurger(false);
     } else {
       setClickMenuBurger(true);
-      setHiddenLinkMain(true)
     }
   };
 
