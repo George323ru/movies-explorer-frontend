@@ -5,8 +5,8 @@
 
   font-family: var(--main-font-family);
   font-weight: 400;
-  line-height: 15.73px;
   font-size: 13px;
+  line-height: 16px;
 }
 
 .footer__container {
@@ -46,6 +46,12 @@
 .footer__link {
   color: black;
   text-decoration: none;
+
+  transition: color 0.25s ease-out;
+}
+
+.footer__link:hover {
+  color: #36363665;
 }
 
 @media all and (max-width: 1200px) {
@@ -55,6 +61,11 @@
 }
 
 @media all and (max-width: 530px) {
+  .footer {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
   .footer__container {
     padding: 80px 10px 10px;
   }
@@ -75,5 +86,9 @@
   }
   .footer__item:last-of-type {
     margin-bottom: 0;
+  }
+
+  .footer__copyright {
+    color: var(--main-color-text);
   }
 }

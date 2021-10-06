@@ -165,7 +165,7 @@
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  .navigation__links {
+  .navigation__links_visibility_off {
     transform: translateX(520px);
     display: flex;
     flex-direction: column;
@@ -182,7 +182,7 @@
     transition: 0.25s cubic-bezier(0.39, 0.58, 0.57, 1);
   }
 
-  .navigation__links-item {
+  .navigation__links_column {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -217,11 +217,18 @@
     color: #000000;
   }
 
-  .navigation__links-item:last-of-type {
+  .navigation__links-item_direction_column {
+    flex-direction: column;
+  }
+
+  .navigation__profile-link {
     padding-top: 500px;
   }
 
   .navigation_hidden-link {
     display: block;
+  }
+
+  .navigation__links-item_active {
   }
 }

@@ -1,14 +1,15 @@
 .about-project {
   width: 100%;
-}
-
-.about-project__container {
-  min-width: 320px;
-  max-width: 1140px;
-  margin: 0 auto;
   box-sizing: border-box;
   padding-top: 110px;
   padding-bottom: 110px;
+  min-width: 320px;
+  font-family: var(--main-font-family);
+}
+
+.about-project__container {
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .about-project__title {
@@ -16,7 +17,6 @@
   padding-bottom: 23px;
   border-bottom: 1px solid black;
   text-align: left;
-  font-family: var(--main-font-family);
   font-weight: 400;
   line-height: 26.63px;
   font-size: 22px;
@@ -27,7 +27,7 @@
   justify-content: space-between;
   list-style-type: none;
   padding-left: 0;
-  padding-top: 70px;
+  margin: 70px 0 0 0;
 }
 
 .about-project__column {
@@ -41,7 +41,6 @@
 
 .about-project__subtitle {
   margin: 0;
-  font-family: var(--main-font-family);
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
@@ -50,8 +49,8 @@
 
 .about-project__paragraph {
   margin: 0;
-  padding-top: 26px;
-  font-family: var(--main-font-family);
+  margin-top: 26px;
+
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -62,7 +61,6 @@
   display: flex;
   padding-top: 110px;
 
-  font-family: var(--main-font-family);
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -99,7 +97,45 @@
 }
 
 @media all and (max-width: 1200px) {
-  .about-project__container {
+  .about-project {
     padding: 90px 50px;
+  }
+}
+
+@media all and (max-width: 636px) {
+  .about-project {
+    padding: 70px 18px 70px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__description {
+    flex-direction: column;
+  }
+  .about-project__column {
+    margin-left: 0;
+    margin-bottom: 56px;
+  }
+
+  .about-project__column:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .about-project__paragraph {
+    margin-top: 18px;
+  }
+
+  .about-project__timeline-part-first,
+  .about-project__timeline-part-second,
+  .about-project__timeline-caption {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__timeline {
+    padding-top: 60px;
   }
 }

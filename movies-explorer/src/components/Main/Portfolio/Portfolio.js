@@ -13,11 +13,11 @@ const Portfolio = () => {
           </li>
           <li className="portfolio__item">
             <a className="portfolio__link" href="https://github.com/George323ru/russian-travel" target="_blank" rel="noreferrer">Адаптивный сайт</a>
-            <a href="https://github.com/George323ru/russian-travel" target="_blank" rel="noreferrer"><img src={iconArrow} alt="Ссылка на проект"></img></a>
+            <a href="https://github.com/George323ru/russian-travel" target="_blank" rel="noreferrer"><img className="portfolio__image" src={iconArrow} alt="Ссылка на проект"></img></a>
           </li>
           <li className="portfolio__item">
             <a className="portfolio__link" href="https://github.com/George323ru/react-mesto-api-full" target="_blank" rel="noreferrer">Одностраничное приложение</a>
-            <a href="https://github.com/George323ru/react-mesto-api-full" target="_blank" rel="noreferrer"><img src={iconArrow} alt="Ссылка на проект"></img></a>
+            <a href="https://github.com/George323ru/react-mesto-api-full" target="_blank" rel="noreferrer"><img className="portfolio__image" src={iconArrow} alt="Ссылка на проект"></img></a>
           </li>
         </ul>
       </div>

@@ -3,7 +3,7 @@ import "./Navigation.css";
 import "./_hidden/navigation_hidden.css";
 import "./_opened/navigation_opened.css";
 import accauntLogo from "../../images/icon-accaunt.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Navigation = () => {
 
@@ -38,7 +38,7 @@ const Navigation = () => {
   return (
     <nav className={`navigation ${navLinksHidden}`}>
 
-      <div className="navigation__burger-button">
+      <div className={`navigation__burger-button ${accauntLinksHidden}`}>
         <input id="navigation__menu-toggle" type="checkbox" />
         <label
           onClick={handleClickMenuBurger}
@@ -49,7 +49,7 @@ const Navigation = () => {
       </div>
 
       <ul className={`navigation__links ${authLinksHidden}`}>
-        <li className="navigation__links-item">
+        <li className="navigation__links-item ">
           <Link className="navigation__register-link" to="/sign-up">
             Регистрация
           </Link>
@@ -61,13 +61,13 @@ const Navigation = () => {
         </li>
       </ul>
       <div className={`navigation__sublayer ${!clickMenuBurger ? "navigation_hidden" : ""}`}></div>
-      <ul className={`navigation__links ${accauntLinksHidden} ${clickMenuBurger ? "navigation_opened" : ""}`}>
+      <ul className={`navigation__links navigation__links_column navigation__links_visibility_off ${accauntLinksHidden} ${clickMenuBurger ? "navigation_opened" : ""}`}>
         <li className="navigation__links-item navigation_hidden-link">
           <Link className="navigation__main-link">
             Главная
           </Link>
         </li>
-        <li className="navigation__links-item">
+        <li className="navigation__links-item navigation__links-item_direction_column">
           <Link className="navigation__movies-link" to="/movies">
             Фильмы
           </Link>
