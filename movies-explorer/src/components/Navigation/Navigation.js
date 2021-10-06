@@ -62,12 +62,12 @@ const Navigation = () => {
       </ul>
       <div className={`navigation__sublayer ${!clickMenuBurger ? "navigation_hidden" : ""}`}></div>
       <ul className={`navigation__links navigation__links_column navigation__links_visibility_off ${accauntLinksHidden} ${clickMenuBurger ? "navigation_opened" : ""}`}>
-        <li className="navigation__links-item navigation_hidden-link">
+        <li className="navigation__links-item navigation_hidden-link navigation__links-item_margin_null">
           <Link className="navigation__main-link">
             Главная
           </Link>
         </li>
-        <li className="navigation__links-item navigation__links-item_direction_column">
+        <li className="navigation__links-item navigation__links-item_direction_column navigation__links-item_margin_null">
           <Link className="navigation__movies-link" to="/movies">
             Фильмы
           </Link>

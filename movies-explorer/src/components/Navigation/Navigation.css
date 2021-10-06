@@ -232,3 +232,18 @@
   .navigation__links-item_active {
   }
 }
+
+@media (max-width: 520px) {
+  .navigation__links_visibility_off {
+    width: 320px;
+    padding: 144px 10px 48px;
+  }
+
+  .navigation__save-films-link {
+    margin-left: 0;
+  }
+
+  .navigation__links-item_margin_null {
+    margin: 0;
+  }
+}
