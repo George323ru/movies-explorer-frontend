@@ -1,11 +1,30 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 
-const Register = () => {
+const Register = ({ handleRegister }) => {
+  const [registerData, setRegisterData] = useState({ name: "", email: "", password: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password } = registerData;
+
+    handleRegister({ name, email, password });
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target)
+    const { name, value } = e.target;
+    setRegisterData({
+      ...registerData,
+      [name]: value,
+    });
+  };
+
   return (
     <section className="authorization">
       <div className="authorization__container">
-        <form className="authorization__form">
+        <form className="authorization__form" onSubmit={handleSubmit}>
           <h3 className="authorization__title">Добро пожаловать!</h3>
           <div className="authorization__input-wrap">
             <label className="authorization__label" for="name">Имя</label>
@@ -14,7 +33,9 @@ const Register = () => {
               required
               minLength='2'
               maxLength='200'
-              name='text'
+              name='name'
+              value={registerData.name}
+              onChange={handleChange}
               className='authorization__input'
               id="name"
             />
@@ -25,6 +46,8 @@ const Register = () => {
               minLength='2'
               maxLength='200'
               name='email'
+              value={registerData.email}
+              onChange={handleChange}
               className='authorization__input'
               id="email"
             />
@@ -34,6 +57,8 @@ const Register = () => {
               required
               minLength='2'
               maxLength='200'
+              value={registerData.password}
+              onChange={handleChange}
               name='password'
               className='authorization__input'
               id="password"
@@ -48,10 +73,7 @@ const Register = () => {
               Войти
             </Link>
           </p>
-
         </form>
-
-
       </div>
     </section>
   );

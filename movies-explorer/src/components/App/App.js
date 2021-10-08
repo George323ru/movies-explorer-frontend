@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './App.css';
 import Header from '../Header/Header';
 import Movies from "../Movies/Movies";
@@ -10,8 +10,35 @@ import Login from "../Login/Login";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import * as auth from "../../utils/auth"
+import { Redirect, useHistory } from "react-router";
 
 const App = () => {
+  // const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  // const [register, setRegister] = useState(false);
+  const [userData, setUserData] = useState({
+    id: "",
+    email: "",
+  });
+  const history = useHistory();
+
+
+  const handleRegister = ({ name, email, password }) => {
+    auth
+      .register(name, email, password)
+      .then((res) => {
+        const { email, _id } = res;
+        setUserData({
+          id: _id,
+          email: email,
+        });
+        history.push("/sign-in");
+      })
+      .catch((err) => {
+      });
+  };
+
   return (
     <div className="page">
       <Header />
@@ -33,10 +60,13 @@ const App = () => {
           <Login />
         </Route>
         <Route path='/sign-up'>
-          <Register />
+          <Register handleRegister={handleRegister} />
         </Route>
         <Route path='*'>
           <NotFoundPage />
+        </Route>
+        <Route path="/">
+          {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
         </Route>
       </Switch>
       <Footer />
