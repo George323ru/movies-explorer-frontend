@@ -1,0 +1,9 @@
+.header_position_padding-top {
+  padding-top: 52px;
+}
+
+@media all and (max-width: 1200px) {
+  .header_position_padding-top {
+    padding-top: 228px;
+  }
+}

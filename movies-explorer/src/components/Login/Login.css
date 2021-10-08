@@ -1,0 +1,124 @@
+.authorization {
+  width: 100%;
+  font-family: var(--main-font-family);
+  box-sizing: border-box;
+  padding: 60px 0 70px;
+  min-width: 320px;
+}
+
+.authorization__container {
+  max-width: 396px;
+  margin: 0 auto;
+}
+
+.authorization__title {
+  margin: 0;
+  margin-bottom: 40px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.authorization__input-wrap {
+  min-height: 266px;
+}
+
+.authorization__input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 46px;
+  padding: 15px;
+  outline: none;
+
+  background: #f9f9f9;
+  border: 0;
+  border-radius: 8px;
+  font-size: 10px;
+}
+
+.authorization__label {
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+
+  color: var(--main-color-text);
+}
+
+.authorization__input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.authorization__input:last-of-type {
+  margin-bottom: 0;
+}
+
+.authorization__button {
+  width: 100%;
+  height: 50px;
+  margin-top: 69px;
+  margin-bottom: 15px;
+
+  border: 0;
+  border-radius: 2px;
+  background-color: var(--main-color-third);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.1s ease;
+}
+
+.authorization__button:hover {
+  opacity: 0.8;
+}
+
+.authorization__suggest {
+  margin: 0;
+  margin-top: 15px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--main-color-text);
+}
+
+.authorization__link {
+  margin-left: 6px;
+  color: var(--main-color-third);
+  text-decoration: none;
+}
+
+@media all and (max-width: 1200px) {
+  .authorization {
+    padding-top: 36px;
+  }
+}
+
+@media all and (max-width: 570px) {
+  .authorization__container {
+    max-width: 260px;
+  }
+
+  .authorization__title {
+    text-align: center;
+    margin-bottom: 80px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .authorization__button {
+    margin: 0;
+    margin-top: 157px;
+    height: 45px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .authorization__suggest {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

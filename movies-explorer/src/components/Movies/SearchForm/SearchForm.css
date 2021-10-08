@@ -1,0 +1,117 @@
+.search-form {
+  width: 100%;
+  min-width: 320px;
+}
+
+.search-form__container {
+  margin: 0 auto;
+
+  max-width: 1140px;
+  padding-top: 70px;
+  padding-bottom: 48px;
+  font-family: var(--main-font-family);
+}
+
+.search-form__input {
+  width: 100%;
+  margin-bottom: 35px;
+  padding-top: 6px;
+  padding-bottom: 14px;
+  background: url(../../../images/icon-find.svg) no-repeat right 12px;
+  background-size: 34px 34px;
+  border: 0;
+
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  border-bottom: 1px solid #e8e8e8;
+  outline: none;
+}
+
+.search-form__input::-webkit-input-placeholder,
+.search-form__input::-moz-placeholder,
+.search-form__input:-ms-input-placeholder {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  color: var(--main-color-text);
+}
+
+.search-form__input:focus::-webkit-input-placeholder {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-form__input:focus::-moz-placeholder {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-form__input:focus:-moz-placeholder {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.search-form__input:focus:-ms-input-placeholder {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.search-form__checkbox-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.search-form__name-checkbox {
+  margin: 0;
+  margin-left: 15px;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+@media all and (max-width: 1200px) {
+  .search-form__container {
+    padding: 80px 30px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .search-form__input {
+    margin-bottom: 30px;
+  }
+
+  .search-form__checkbox-wrap {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .search-form__name-checkbox {
+    margin-left: 0;
+    margin-right: 16px;
+  }
+}
+
+@media all and (max-width: 440px) {
+  .search-form__container {
+    padding: 90px 14px 50px;
+    align-items: center;
+  }
+
+  .search-form__input,
+  .search-form__input::-webkit-input-placeholder,
+  .search-form__input::-moz-placeholder,
+  .search-form__input:-ms-input-placeholder {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .search-form__input {
+    margin-bottom: 41px;
+  }
+
+  .search-form__checkbox-wrap {
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,0 +1,141 @@
+.about-project {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 110px;
+  padding-bottom: 110px;
+  min-width: 320px;
+  font-family: var(--main-font-family);
+}
+
+.about-project__container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.about-project__title {
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid black;
+  text-align: left;
+  font-weight: 400;
+  line-height: 26.63px;
+  font-size: 22px;
+}
+
+.about-project__description {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 70px 0 0 0;
+}
+
+.about-project__column {
+  max-width: 550px;
+  margin-left: 30px;
+}
+
+.about-project__column:first-of-type {
+  margin-left: 0;
+}
+
+.about-project__subtitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.about-project__paragraph {
+  margin: 0;
+  margin-top: 26px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about-project__timeline {
+  width: 100%;
+  display: flex;
+  padding-top: 110px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.about-project__timeline-backend {
+  text-align: center;
+  width: 20%;
+}
+
+.about-project__timeline-part-first {
+  margin: 0;
+  padding: 10px 0 10px 0;
+  background-color: var(--main-color-third);
+}
+
+.about-project__timeline-caption {
+  margin: 0;
+  padding-top: 15px;
+  color: var(--main-color-text);
+  font-weight: 500;
+}
+
+.about-project__timeline-fronend {
+  text-align: center;
+  width: 80%;
+}
+
+.about-project__timeline-part-second {
+  margin: 0;
+  padding: 10px 0 10px 0;
+  background-color: #f2f2f2;
+}
+
+@media all and (max-width: 1200px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+}
+
+@media all and (max-width: 636px) {
+  .about-project {
+    padding: 70px 18px 70px;
+  }
+
+  .about-project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__description {
+    flex-direction: column;
+  }
+  .about-project__column {
+    margin-left: 0;
+    margin-bottom: 56px;
+  }
+
+  .about-project__column:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .about-project__paragraph {
+    margin-top: 18px;
+  }
+
+  .about-project__timeline-part-first,
+  .about-project__timeline-part-second,
+  .about-project__timeline-caption {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__timeline {
+    padding-top: 60px;
+  }
+}

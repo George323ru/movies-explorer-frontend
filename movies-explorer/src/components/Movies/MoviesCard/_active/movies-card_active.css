@@ -1,0 +1,8 @@
+.movies-card_active {
+  background: var(--main-color-accent);
+  transition: background 0.2s ease-out;
+}
+
+.movies-card_active:hover {
+  background: #f84e7bf3;
+}
