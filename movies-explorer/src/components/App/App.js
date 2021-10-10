@@ -39,6 +39,24 @@ const App = () => {
       });
   };
 
+  const handleLogin = ({ email, password }) => {
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        setUserData({
+          ...userData,
+          email: email,
+        });
+        if (data) {
+          localStorage.setItem("jwt", data.token);
+          api.setItemToken(data.token);
+        }
+        setLoggedIn(true);
+        history.push("/");
+      })
+      .catch(handleError);
+  };
+
   return (
     <div className="page">
       <Header />

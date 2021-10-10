@@ -8,9 +8,11 @@ const Register = ({ handleRegister }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = registerData;
-
+    console.log({ name, email, password })
     handleRegister({ name, email, password });
   };
+
+
 
   const handleChange = (e) => {
     console.log(e.target)
@@ -20,6 +22,8 @@ const Register = ({ handleRegister }) => {
       [name]: value,
     });
   };
+
+
 
   return (
     <section className="authorization">
