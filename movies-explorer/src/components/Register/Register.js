@@ -43,6 +43,7 @@ const Register = ({ handleRegister }) => {
               className='authorization__input'
               id="name"
             />
+            <span className="authorization__input-error"></span>
             <label className="authorization__label" for="email">E-mail</label>
             <input
               type='email'
@@ -55,6 +56,7 @@ const Register = ({ handleRegister }) => {
               className='authorization__input'
               id="email"
             />
+            <span className="authorization__input-error"></span>
             <label className="authorization__label" for="password">Пароль</label>
             <input
               type='password'
@@ -67,6 +69,7 @@ const Register = ({ handleRegister }) => {
               className='authorization__input'
               id="password"
             />
+            <span className="authorization__input-error"></span>
           </div>
           <button className='authorization__button' type='submit'>
             Зарегистрироваться
