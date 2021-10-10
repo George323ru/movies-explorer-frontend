@@ -9,16 +9,20 @@ const MoviesCardList = ({ movies }) => {
 
 
   let maxCardNumber
+  let countAddCard
 
   switch (true) {
     case screenWidth > 1280:
-      maxCardNumber = 12
+      maxCardNumber = 12;
+      countAddCard = 3;
       break;
     case screenWidth < 1279 && screenWidth > 786:
-      maxCardNumber = 8
+      maxCardNumber = 8;
+      countAddCard = 2;
       break;
     case screenWidth > 320 && screenWidth < 786:
-      maxCardNumber = 5
+      maxCardNumber = 5;
+      countAddCard = 2;
       break;
 
     default:
@@ -27,8 +31,10 @@ const MoviesCardList = ({ movies }) => {
 
   const [cardsLimit, setCardsLimit] = useState(maxCardNumber);
 
-
-
+  const showMoreCards = () => {
+    setCardsLimit((i) => i + countAddCard)
+  }
+  console.log(cardsLimit)
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__container">
@@ -39,11 +45,15 @@ const MoviesCardList = ({ movies }) => {
           />
         )).slice(0, cardsLimit)}
       </ul>
-      <div className="movies-card-list__pagination">
-        <button className="movies-card-list__append-button">
-          Еще
-        </button>
-      </div>
+      {cardsLimit <= movies.length && (
+        <div className="movies-card-list__pagination">
+          <button
+            className="movies-card-list__append-button"
+            onClick={showMoreCards}>
+            Еще
+          </button>
+        </div>
+      )}
     </section>
   );
 };
