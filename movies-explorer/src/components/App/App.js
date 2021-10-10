@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { Redirect, useHistory } from "react-router";
 import './App.css';
 import Header from '../Header/Header';
 import Movies from "../Movies/Movies";
@@ -10,8 +11,7 @@ import Login from "../Login/Login";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import * as auth from "../../utils/auth"
-import { Redirect, useHistory } from "react-router";
+import * as auth from "../../utils/auth";
 
 const App = () => {
   // const [currentUser, setCurrentUser] = useState({});
@@ -23,6 +23,8 @@ const App = () => {
   });
   const history = useHistory();
 
+  const handleError = () => (err) => console.error(err);
+
 
   const handleRegister = ({ name, email, password }) => {
     auth
@@ -33,6 +35,7 @@ const App = () => {
           id: _id,
           email: email,
         });
+
         history.push("/sign-in");
       })
       .catch((err) => {
@@ -49,10 +52,10 @@ const App = () => {
         });
         if (data) {
           localStorage.setItem("jwt", data.token);
-          api.setItemToken(data.token);
+          // api.setItemToken(data.token);
         }
         setLoggedIn(true);
-        history.push("/");
+        history.push("/movies");
       })
       .catch(handleError);
   };
