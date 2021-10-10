@@ -26,7 +26,7 @@ const MoviesCardList = ({ movies }) => {
       break;
 
     default:
-
+      maxCardNumber = 4;
   }
 
   const [cardsLimit, setCardsLimit] = useState(maxCardNumber);

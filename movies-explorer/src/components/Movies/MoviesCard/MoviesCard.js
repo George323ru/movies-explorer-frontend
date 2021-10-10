@@ -22,13 +22,13 @@ const MoviesCard = ({ movie }) => {
 
   useEffect(() => {
     if (pathname === "/saved-movies") {
-      setClickSaveButton((<img className="movies-card__button-icon" src={iconDeleteCard} alt="Кнопка сохранения карточки"></img>));
+      setClickSaveButton((<img className="movies-card__button-icon" src={iconDeleteCard} alt="Кнопка удаления карточки"></img>));
     } else {
       setClickSaveButton('Сохранить')
     }
   }, [pathname]);
 
-  const handltClickSaveButton = () => {
+  const handleClickSaveButton = () => {
     if (pathname === "/saved-movies") {
       setClickSaveButton((<img className="movies-card__button-icon" src={iconDeleteCard} alt="Кнопка сохранения карточки"></img>));
     } else {
@@ -49,8 +49,13 @@ const MoviesCard = ({ movie }) => {
         <h2 className="movies-card__title">{nameRU}</h2>
         <p className="movies-card__duration">{duration}</p>
       </div>
-      <img className="movies-card__image" src={`https://api.nomoreparties.co${image.url}`} alt="Картинка карточки"></img>
-      <button className={`movies-card__button ${saveButtonColor ? "movies-card_active" : ""}`} onClick={handltClickSaveButton}>
+      <a className="movies-card__link-image"
+        href={trailerLink}
+        target="_blank"
+        rel="noreferrer">
+        <img className="movies-card__image" src={`https://api.nomoreparties.co${image.url}`} alt="Картинка фильма"></img>
+      </a>
+      <button className={`movies-card__button ${saveButtonColor ? "movies-card_active" : ""}`} onClick={handleClickSaveButton}>
         {clickSaveButton}
       </button>
     </li>
