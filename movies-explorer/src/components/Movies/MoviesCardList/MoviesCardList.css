@@ -43,8 +43,8 @@
   .movies-card-list__container {
     padding: 70px 30px 30px;
     grid-template-columns: repeat(auto-fill, 342px);
-    column-gap: 35px;
-    row-gap: 24px;
+    column-gap: 24px;
+    row-gap: 35px;
   }
 }
 

@@ -59,6 +59,13 @@ overflow: hidden;
   background-color: #d1d1d165;
 }
 
+
+@media all and (max-width: 768px) {
+  .movies-card__image { 
+  height: 190px;  
+}
+}
+
 @media all and (max-width: 440px) {
   .movies-card__title-wrap {
     padding: 14px;
@@ -71,6 +78,10 @@ overflow: hidden;
   .movies-card__duration {
     font-size: 10px;
   }
+
+   .movies-card__image { 
+  height: 168px;  
+}
 
   .movies-card__button {
     margin: 14px auto;
