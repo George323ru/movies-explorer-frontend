@@ -2,18 +2,30 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import moviesApi from "../../utils/MoviesApi"
+import Preloader from "./Preloader/Preloader";
+import { useEffect, useState } from "react";
 
 const Movies = () => {
 
-  moviesApi.getBeatFilmMovies()
-    .then((res) => console.log(res))
+  const [movies, setMovies] = useState([])
 
+  useEffect(() => {
+    moviesApi.getBeatFilmMovies()
+      .then((res) => setMovies(res))
+  }, [])
+
+
+
+  console.log(movies)
 
   return (
     <section className="movies">
       <div className="movies__container">
         <SearchForm />
-        <MoviesCardList />
+        {/* <Preloader /> */}
+        <MoviesCardList
+          movies={movies}
+        />
       </div>
     </section>
   );
