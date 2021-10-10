@@ -5,8 +5,6 @@ import { useState } from "react";
 const MoviesCardList = ({ movies }) => {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-  console.log(screenWidth)
-
 
   let maxCardNumber
   let countAddCard
