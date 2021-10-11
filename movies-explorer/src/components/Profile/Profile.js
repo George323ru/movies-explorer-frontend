@@ -8,7 +8,7 @@ const Profile = () => {
         <form className="profile__form">
           <h3 className="profile__title">Привет, Виталий!</h3>
           <div className="profile__input-field">
-            <label className="profile__label" for="name">Имя</label>
+            <label className="profile__label" htmlFor="name">Имя</label>
             <input
               type='text'
               required
@@ -20,7 +20,7 @@ const Profile = () => {
             />
           </div>
           <div className="profile__input-field">
-            <label className="profile__label" for="email">E-mail</label>
+            <label className="profile__label" htmlFor="email">E-mail</label>
             <input
               type='email'
               required

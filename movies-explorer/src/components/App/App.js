@@ -43,16 +43,18 @@ const App = () => {
   };
 
   const handleLogin = ({ email, password }) => {
+    console.log({ email, password })
     auth
       .authorize(email, password)
       .then((data) => {
+        console.log(data)
         setUserData({
           ...userData,
           email: email,
         });
         if (data) {
           localStorage.setItem("jwt", data.token);
-          // api.setItemToken(data.token);
+
         }
         setLoggedIn(true);
         history.push("/movies");
@@ -79,7 +81,7 @@ const App = () => {
           <Profile />
         </Route>
         <Route path='/sign-in'>
-          <Login />
+          <Login handleLogin={handleLogin} />
         </Route>
         <Route path='/sign-up'>
           <Register handleRegister={handleRegister} />

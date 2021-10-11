@@ -22,6 +22,8 @@
 
 .authorization__input-wrap {
   min-height: 266px;
+  display: flex;
+  flex-direction: column;
 }
 
 .authorization__input {
@@ -47,11 +49,7 @@
 
 .authorization__input {
   margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.authorization__input:last-of-type {
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 .authorization__button {
@@ -73,6 +71,22 @@
 
 .authorization__button:hover {
   opacity: 0.8;
+}
+
+.authorization__button_disabled {
+  background-color: var(--main-color-text);
+}
+
+.authorization__input-error {
+  height: 10px;
+  margin-bottom: 16px;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--main-color-accent);
+}
+
+.authorization__input-error:last-of-type {
+  margin-bottom: 0;
 }
 
 .authorization__suggest {

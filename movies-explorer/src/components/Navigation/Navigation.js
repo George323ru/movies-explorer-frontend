@@ -42,7 +42,7 @@ const Navigation = () => {
         <label
           onClick={handleClickMenuBurger}
           className="navigation__menu-btn"
-          for="navigation__menu-toggle">
+          htmlFor="navigation__menu-toggle">
           <span></span>
         </label>
       </div>
@@ -62,7 +62,7 @@ const Navigation = () => {
       <div className={`navigation__sublayer ${!clickMenuBurger ? "navigation_hidden" : ""}`}></div>
       <ul className={`navigation__links navigation__links_column navigation__links_visibility_off ${accauntLinksHidden} ${clickMenuBurger ? "navigation_opened" : ""}`}>
         <li className="navigation__links-item navigation_hidden-link navigation__links-item_margin_null">
-          <Link className="navigation__main-link">
+          <Link className="navigation__main-link" to="/">
             Главная
           </Link>
         </li>
