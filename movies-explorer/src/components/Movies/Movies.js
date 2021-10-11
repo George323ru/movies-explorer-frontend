@@ -13,7 +13,6 @@ const Movies = ({ handleError }) => {
 
   const getMovieSearchInput = (dataInput) => {
     setMovieInput(dataInput.toLowerCase())
-
   }
 
   useEffect(() => {
@@ -23,13 +22,11 @@ const Movies = ({ handleError }) => {
       moviesApi.getBeatFilmMovies()
         .then((res) => {
 
-
           function searchFilm(data) {
 
             return data.filter((item) => {
               const filmNameEN = item.nameEN && item.nameEN.toLowerCase();
               const filmNameRU = item.nameRU && item.nameRU.toLowerCase();
-
 
               return (
                 filmNameRU && filmNameRU.includes(movieInput)
@@ -37,7 +34,6 @@ const Movies = ({ handleError }) => {
               )
             })
           }
-
 
           const filterFilm = searchFilm(res)
 
