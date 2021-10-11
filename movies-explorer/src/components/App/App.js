@@ -69,7 +69,8 @@ const App = () => {
           <Main />
         </Route>
         <Route path='/movies'>
-          <Movies />
+          <Movies
+            handleError={handleError} />
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies />

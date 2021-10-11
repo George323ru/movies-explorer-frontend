@@ -3,7 +3,7 @@ import Card from '../MoviesCard/MoviesCard'
 import { useState } from "react";
 import Preloader from "../Preloader/Preloader";
 
-const MoviesCardList = ({ movies, loading }) => {
+const MoviesCardList = ({ movies, isLoadingFilmSuccess }) => {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -36,30 +36,45 @@ const MoviesCardList = ({ movies, loading }) => {
 
   return (
     <>
-      {loading
-        ? (<Preloader />)
-        : (<section className="movies-card-list">
-          <ul className="movies-card-list__container">
-            {movies.map(({ id, ...movies }) => (
-              <Card
-                key={id}
-                movie={movies}
-              />
-            )).slice(0, cardsLimit)}
-          </ul>
-          {cardsLimit <= movies.length && (
-            <div className="movies-card-list__pagination">
-              <button
-                className="movies-card-list__append-button"
-                onClick={showMoreCards}>
-                Еще
-              </button>
-            </div>
-          )}
-        </section>)}
+      {<section className="movies-card-list">
+        {isLoadingFilmSuccess ? (<>
+          {
+            movies.length > 0
+              ? (
+                <>
+                  <ul className="movies-card-list__container">
+                    {movies.map(({ id, ...movies }) => (
+                      <Card
+                        key={id}
+                        movie={movies}
+                      />
+                    )).slice(0, cardsLimit)}
+                  </ul>
+                  {cardsLimit <= movies.length && (
+                    <div className="movies-card-list__pagination">
+                      <button
+                        className="movies-card-list__append-button"
+                        onClick={showMoreCards}>
+                        Еще
+                      </button>
+                    </div>
+                  )}
+                </>
+              )
+              : (<p className="movies-card-list__caption">
+                Ничего не найдено
+              </p>)
+          }
+        </>)
+          : (<p className="movies-card-list__caption">
+            Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.
+          </p>)}
 
+
+      </section>}
     </>
-  );
+
+  )
 };
 
 export default MoviesCardList;
