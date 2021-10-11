@@ -18,13 +18,13 @@ export function register(name, email, password) {
 
 export const authorize = (email, password) => {
 
-  return fetch(`${BASE_URL}/sign-in`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
+
     body: JSON.stringify({ password, email })
   })
     .then(checkRes)
@@ -38,7 +38,6 @@ export const checkToken = (token) => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     },
-    credentials: 'include',
   })
     .then(checkRes)
 }
