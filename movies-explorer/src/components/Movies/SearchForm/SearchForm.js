@@ -1,20 +1,48 @@
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 import buttonImg from "../../../images/icon-find.svg";
+import { useState } from "react";
 
-const SearchForm = () => {
+const SearchForm = ({ handleSearchInput }) => {
+
+  const [movieInput, setMovieInput] = useState("");
+
+  const handleChangeMovie = (e) => {
+    setMovieInput(e.target.value);
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearchInput(movieInput)
+
+  };
+
   return (
     <section className="search-form">
-      <div className="search-form__container">
-        <input className="search-form__input" placeholder="Фильм" required></input>
-        <button className="search-form__button">
-          <img className="search-form__button-image" src={buttonImg} alt="Кнопка поиска"></img>
+      <form className="search-form__container"
+        onSubmit={handleSubmit}>
+        <input
+          className="search-form__input"
+          type="text"
+          placeholder="Фильм"
+          name="movieSearchInput"
+          value={movieInput || ""}
+          onChange={handleChangeMovie}
+          required />
+        <button
+          className="search-form__button"
+          type="submit">
+          <img
+            className="search-form__button-image"
+            src={buttonImg}
+            alt="Кнопка поиска"></img>
         </button>
         <div className="search-form__checkbox-wrap">
           <FilterCheckbox />
           <p className="search-form__name-checkbox">Короткометражки</p>
         </div>
-      </div>
+      </form>
     </section>
   );
 };

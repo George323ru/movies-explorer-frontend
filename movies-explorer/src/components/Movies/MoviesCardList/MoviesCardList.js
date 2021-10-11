@@ -1,8 +1,9 @@
 import "./MoviesCardList.css";
 import Card from '../MoviesCard/MoviesCard'
 import { useState } from "react";
+import Preloader from "../Preloader/Preloader";
 
-const MoviesCardList = ({ movies }) => {
+const MoviesCardList = ({ movies, loading }) => {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -32,27 +33,32 @@ const MoviesCardList = ({ movies }) => {
   const showMoreCards = () => {
     setCardsLimit((i) => i + countAddCard)
   }
-  console.log(cardsLimit)
+
   return (
-    <section className="movies-card-list">
-      <ul className="movies-card-list__container">
-        {movies.map(({ id, ...movies }) => (
-          <Card
-            key={id}
-            movie={movies}
-          />
-        )).slice(0, cardsLimit)}
-      </ul>
-      {cardsLimit <= movies.length && (
-        <div className="movies-card-list__pagination">
-          <button
-            className="movies-card-list__append-button"
-            onClick={showMoreCards}>
-            Еще
-          </button>
-        </div>
-      )}
-    </section>
+    <>
+      {loading
+        ? (<Preloader />)
+        : (<section className="movies-card-list">
+          <ul className="movies-card-list__container">
+            {movies.map(({ id, ...movies }) => (
+              <Card
+                key={id}
+                movie={movies}
+              />
+            )).slice(0, cardsLimit)}
+          </ul>
+          {cardsLimit <= movies.length && (
+            <div className="movies-card-list__pagination">
+              <button
+                className="movies-card-list__append-button"
+                onClick={showMoreCards}>
+                Еще
+              </button>
+            </div>
+          )}
+        </section>)}
+
+    </>
   );
 };
 
