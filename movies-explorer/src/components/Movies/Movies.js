@@ -5,7 +5,7 @@ import moviesApi from "../../utils/MoviesApi"
 import Preloader from "./Preloader/Preloader";
 import { useEffect, useState } from "react";
 
-const Movies = ({ handleError }) => {
+const Movies = ({ handleError, handleSaveMovie }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const [movies, setMovies] = useState([]);
@@ -23,7 +23,7 @@ const Movies = ({ handleError }) => {
         .then((res) => {
 
           function searchFilm(data) {
-
+            console.log(data)
             return data.filter((item) => {
               const filmNameEN = item.nameEN && item.nameEN.toLowerCase();
               const filmNameRU = item.nameRU && item.nameRU.toLowerCase();
@@ -56,6 +56,7 @@ const Movies = ({ handleError }) => {
           : (<MoviesCardList
             movies={movies}
             isLoadingFilmSuccess={isLoadingFilmSuccess}
+            handleSaveMovie={handleSaveMovie}
           />)}
       </div>
     </section>

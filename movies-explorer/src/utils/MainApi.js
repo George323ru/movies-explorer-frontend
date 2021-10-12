@@ -7,7 +7,6 @@ class MainApi {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._token = config.token;
-
   }
 
   _checkingResponse(res) {
@@ -15,6 +14,14 @@ class MainApi {
       return res.json();
     }
     return Promise.reject(`Ошибка ${res.status}`);
+  }
+
+  setItemToken(token) {
+    this._token = token
+  }
+
+  removeItemToken() {
+    this._token = ""
   }
 
   getUserInfo() {
@@ -56,8 +63,8 @@ class MainApi {
     year,
     description,
     image,
-    trailerLink,
     id,
+    trailerLink,
     nameRU,
     nameEN,
   }) {

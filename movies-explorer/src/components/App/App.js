@@ -12,6 +12,7 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import * as auth from "../../utils/auth";
+import mainApi from "../../utils/MainApi";
 
 const App = () => {
   // const [currentUser, setCurrentUser] = useState({});
@@ -25,7 +26,6 @@ const App = () => {
 
   const handleError = () => (err) => console.error(err);
 
-
   const handleRegister = ({ name, email, password }) => {
     auth
       .register(name, email, password)
@@ -38,29 +38,62 @@ const App = () => {
 
         history.push("/sign-in");
       })
-      .catch((err) => {
-      });
+      .catch(handleError);
   };
 
   const handleLogin = ({ email, password }) => {
-    console.log({ email, password })
+
     auth
       .authorize(email, password)
       .then((data) => {
         console.log(data)
-        setUserData({
-          ...userData,
-          email: email,
-        });
+
         if (data) {
           localStorage.setItem("jwt", data.token);
-
+          // console.log(data.token)
+          mainApi.setItemToken(data.token)
         }
         setLoggedIn(true);
         history.push("/movies");
       })
       .catch(handleError);
   };
+
+  const handleSaveMovie = ({ movie }) => {
+    const {
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      id,
+      trailerLink,
+      nameRU,
+      nameEN,
+    } = movie;
+
+    mainApi
+      .saveMovie(
+        {
+          country,
+          director,
+          duration,
+          year,
+          description,
+          image,
+          id,
+          trailerLink,
+          nameRU,
+          nameEN,
+        }
+      )
+      .then((res) => {
+        console.log(res)
+      })
+  }
+
+
 
   return (
     <div className="page">
@@ -72,10 +105,12 @@ const App = () => {
         </Route>
         <Route path='/movies'>
           <Movies
-            handleError={handleError} />
+            handleError={handleError}
+            handleSaveMovie={handleSaveMovie} />
         </Route>
         <Route path='/saved-movies'>
-          <SavedMovies />
+          <SavedMovies
+          />
         </Route>
         <Route path='/profile'>
           <Profile />

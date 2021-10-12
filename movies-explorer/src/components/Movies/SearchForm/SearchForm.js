@@ -14,10 +14,7 @@ const SearchForm = ({ handleSearchInput }) => {
     resetForm,
   } = useFormWithValidation();
 
-  console.log(errors)
-
   const [movieInput, setMovieInput] = useState("");
-
 
   const handleChangeMovie = (e) => {
     setMovieInput(e.target.value);
