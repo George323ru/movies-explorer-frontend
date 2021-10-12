@@ -15,7 +15,7 @@ import * as auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
 
 const App = () => {
-  // const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   // const [register, setRegister] = useState(false);
   const [userData, setUserData] = useState({
@@ -88,6 +88,17 @@ const App = () => {
       .catch(handleError);
   };
 
+  useEffect(() => {
+    if (loggedIn) {
+      Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
+        .then(([userInfo, moviesInfo]) => {
+          setCurrentUser(userInfo);
+          setSavedMovies(moviesInfo);
+        })
+        .catch((err) => console.log("Ошибка при получении данных, " + err));
+    }
+  }, [loggedIn]);
+
   const handleSaveMovie = ({ movie }) => {
     setIsLoadingFilmSuccess(false)
     const {
@@ -128,7 +139,7 @@ const App = () => {
   const handleDeleteMovie = ({ id }) => {
     console.log(id)
     mainApi
-      .deleteMovie()
+      .deleteMovie({ id })
   }
 
 
