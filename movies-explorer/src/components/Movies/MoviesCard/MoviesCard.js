@@ -5,12 +5,15 @@ import iconSave from "../../../images/icon-save.svg";
 import iconDeleteCard from "../../../images/icon-delete.svg";
 import { useLocation } from "react-router";
 
-const MoviesCard = ({ movie, handleSaveMovie }) => {
+const MoviesCard = ({ movie,
+  handleSaveMovie,
+  handleDeleteMovie }) => {
   const
     {
       nameRU,
       duration,
       image,
+      id,
       trailerLink,
     } = movie;
 
@@ -32,7 +35,9 @@ const MoviesCard = ({ movie, handleSaveMovie }) => {
       ? setIsClickSaveButton(false)
       : setIsClickSaveButton(true)
 
-    handleSaveMovie({ movie })
+    isClickSaveButton
+      ? handleDeleteMovie({ id })
+      : handleSaveMovie({ movie })
   }
 
   return (

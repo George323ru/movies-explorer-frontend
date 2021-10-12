@@ -3,7 +3,10 @@ import Card from '../MoviesCard/MoviesCard'
 import { useState } from "react";
 import Preloader from "../Preloader/Preloader";
 
-const MoviesCardList = ({ movies, isLoadingFilmSuccess, handleSaveMovie }) => {
+const MoviesCardList = ({ movies,
+  isLoadingFilmSuccess,
+  handleSaveMovie,
+  handleDeleteMovie }) => {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -48,6 +51,7 @@ const MoviesCardList = ({ movies, isLoadingFilmSuccess, handleSaveMovie }) => {
                         key={id}
                         movie={movie}
                         handleSaveMovie={handleSaveMovie}
+                        handleDeleteMovie={handleDeleteMovie}
                       />
                     )).slice(0, cardsLimit)}
                   </ul>

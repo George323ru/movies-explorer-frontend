@@ -26,6 +26,33 @@ const App = () => {
 
   const handleError = () => (err) => console.error(err);
 
+  useEffect(() => {
+    checkToken();
+    // eslint-disable-next-line
+  }, []);
+
+  const checkToken = () => {
+    const jwt = localStorage.getItem("jwt");
+
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then((res) => {
+          mainApi.setItemToken(jwt);
+          setUserData({
+            id: res._id,
+            email: res.email,
+          });
+          setLoggedIn(true);
+          history.push("/movies");
+        })
+        .catch(handleError);
+    } else {
+      setLoggedIn(false);
+      console.log('Пустой токен');
+    }
+  };
+
   const handleRegister = ({ name, email, password }) => {
     auth
       .register(name, email, password)
@@ -50,7 +77,6 @@ const App = () => {
 
         if (data) {
           localStorage.setItem("jwt", data.token);
-          // console.log(data.token)
           mainApi.setItemToken(data.token)
         }
         setLoggedIn(true);
@@ -93,6 +119,11 @@ const App = () => {
       })
   }
 
+  const handleDeleteMovie = ({ id }) => {
+    console.log(id)
+    mainApi
+      .deleteMovie()
+  }
 
 
   return (
@@ -106,10 +137,11 @@ const App = () => {
         <Route path='/movies'>
           <Movies
             handleError={handleError}
-            handleSaveMovie={handleSaveMovie} />
+            handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies
+            handleDeleteMovie={handleDeleteMovie}
           />
         </Route>
         <Route path='/profile'>

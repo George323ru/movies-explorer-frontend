@@ -5,7 +5,11 @@ import moviesApi from "../../utils/MoviesApi"
 import Preloader from "./Preloader/Preloader";
 import { useEffect, useState } from "react";
 
-const Movies = ({ handleError, handleSaveMovie }) => {
+const Movies = ({
+  handleError,
+  handleSaveMovie,
+  handleDeleteMovie }) => {
+
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const [movies, setMovies] = useState([]);
@@ -57,6 +61,7 @@ const Movies = ({ handleError, handleSaveMovie }) => {
             movies={movies}
             isLoadingFilmSuccess={isLoadingFilmSuccess}
             handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}
           />)}
       </div>
     </section>
