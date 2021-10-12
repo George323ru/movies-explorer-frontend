@@ -136,10 +136,11 @@ const App = () => {
   }
   console.log(savedMovies)
 
-  const handleDeleteMovie = ({ id }) => {
-    console.log(id)
+  const handleDeleteMovie = ({ nameRU }) => {
+    let movieId = savedMovies.find((item) => item.nameRU === nameRU)
+
     mainApi
-      .deleteMovie({ id })
+      .deleteMovie({ movieId })
   }
 
 

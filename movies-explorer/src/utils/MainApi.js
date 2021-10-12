@@ -94,8 +94,9 @@ class MainApi {
     }).then(this._checkingResponse);
   }
 
-  deleteMovie(movieId) {
-    return fetch(`${this._baseUrl}/cards/${movieId}`, {
+  deleteMovie({ movieId }) {
+
+    return fetch(`${this._baseUrl}/movies/${movieId._id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

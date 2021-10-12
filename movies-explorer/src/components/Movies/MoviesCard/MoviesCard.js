@@ -36,7 +36,7 @@ const MoviesCard = ({ movie,
       : setIsClickSaveButton(true)
 
     isClickSaveButton
-      ? handleDeleteMovie({ id })
+      ? handleDeleteMovie({ nameRU })
       : handleSaveMovie({ movie })
   }
 
