@@ -13,21 +13,12 @@ const MoviesCard = ({ movie,
       nameRU,
       duration,
       image,
-      id,
       trailerLink,
     } = movie;
 
   const { pathname } = useLocation();
 
-  const [labelSaveButton, setLabelSaveButton] = useState('');
   const [isClickSaveButton, setIsClickSaveButton] = useState(false)
-
-  useEffect(() => {
-    pathname === "/saved-movies"
-      ? setLabelSaveButton((<img className="movies-card__button-icon" src={iconDeleteCard} alt="Иконка удаления карточки" />))
-      : setLabelSaveButton('Сохранить')
-
-  }, [pathname]);
 
   const handleClickSaveButton = () => {
 
@@ -65,15 +56,27 @@ const MoviesCard = ({ movie,
           alt="Картинка фильма" />
       </a>
       <button
-        className={`movies-card__button ${isClickSaveButton ? "movies-card_active" : ""}`}
+        className={pathname === "/saved-movies"
+          ? "movies-card__button"
+          : `movies-card__button ${isClickSaveButton
+            ? "movies-card_active"
+            : ""}`}
         onClick={handleClickSaveButton}>
+
         {pathname === "/saved-movies"
-          ? (<img className="movies-card__button-icon" src={iconDeleteCard} alt="Кнопка сохранения карточки" />)
+          ? (
+            <img className="movies-card__button-icon"
+              src={iconDeleteCard}
+              alt="Кнопка сохранения карточки" />
+          )
           : isClickSaveButton
             ? (
-              <img className="movies-card__button-icon" src={iconSave} alt="Кнопка сохранения карточки" />
+              <img className="movies-card__button-icon"
+                src={iconSave}
+                alt="Кнопка сохранения карточки" />
             )
             : "Сохранить"}
+
       </button>
     </li>
 

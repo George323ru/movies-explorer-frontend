@@ -4,7 +4,9 @@ import useFormWithValidation from "../../../utils/useFormWithValidation"
 import buttonImg from "../../../images/icon-find.svg";
 import { useState } from "react";
 
-const SearchForm = ({ handleSearchInput }) => {
+const SearchForm = ({
+  handleSearchInput,
+  handleCheckboxShortFilm }) => {
 
   const {
     values,
@@ -49,7 +51,8 @@ const SearchForm = ({ handleSearchInput }) => {
         </button>
         <span className="search-form__caption">{errors.movieSearchInput}</span>
         <div className="search-form__checkbox-wrap">
-          <FilterCheckbox />
+          <FilterCheckbox
+            onClick={handleCheckboxShortFilm} />
           <p className="search-form__name-checkbox">Короткометражки</p>
         </div>
       </form>

@@ -1,7 +1,6 @@
 import "./MoviesCardList.css";
 import Card from '../MoviesCard/MoviesCard'
 import { useState } from "react";
-import Preloader from "../Preloader/Preloader";
 
 const MoviesCardList = ({ movies,
   isLoadingFilmSuccess,
@@ -14,7 +13,7 @@ const MoviesCardList = ({ movies,
   let countAddCard
 
   switch (true) {
-    case screenWidth > 1280:
+    case screenWidth > 1133:
       maxCardNumber = 12;
       countAddCard = 3;
       break;
