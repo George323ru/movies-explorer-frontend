@@ -141,6 +141,9 @@ const App = () => {
 
     mainApi
       .deleteMovie({ movieId })
+      .then(() => {
+        setSavedMovies(savedMovies.filter((item) => item._id !== movieId._id));
+      })
   }
 
 
@@ -161,6 +164,7 @@ const App = () => {
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies
+            handleSaveMovie={handleSaveMovie}
             handleDeleteMovie={handleDeleteMovie}
             savedMovies={savedMovies}
             isLoadingFilmSuccess={isLoadingFilmSuccess}

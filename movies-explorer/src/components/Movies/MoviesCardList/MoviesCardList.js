@@ -56,15 +56,15 @@ const MoviesCardList = ({ movies,
                         />
                       )).slice(0, cardsLimit)}
                     </ul>
-                    {cardsLimit <= movies.length && (
-                      <div className="movies-card-list__pagination">
+                    <div className="movies-card-list__pagination">
+                      {cardsLimit <= movies.length && (
                         <button
                           className="movies-card-list__append-button"
                           onClick={showMoreCards}>
                           Еще
                         </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </>
                 )
                 : (<p className="movies-card-list__caption">

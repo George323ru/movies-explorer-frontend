@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import moviesApi from "../../utils/MoviesApi"
 import Preloader from "./Preloader/Preloader";
+import searchFilm from "../../utils/searchFilm";
 import { useEffect, useState } from "react";
 
 const Movies = ({
@@ -26,23 +27,15 @@ const Movies = ({
       moviesApi.getBeatFilmMovies()
         .then((res) => {
 
-          function searchFilm(data) {
-            console.log(data)
-            return data.filter((item) => {
-              const filmNameEN = item.nameEN && item.nameEN.toLowerCase();
-              const filmNameRU = item.nameRU && item.nameRU.toLowerCase();
+          const foundMovies = searchFilm(res, movieInput)
 
-              return (
-                filmNameRU && filmNameRU.includes(movieInput)
-                || filmNameEN && filmNameEN.includes(movieInput)
-              )
-            })
-          }
-
-          const filterFilm = searchFilm(res)
+          localStorage.setItem(
+            "savedMovies",
+            JSON.stringify(foundMovies)
+          );
 
           setIsLoading(false)
-          setMovies(filterFilm)
+          setMovies(foundMovies)
         }).catch((err) => {
           handleError(err)
           setIsLoadingFilmSuccess(false)

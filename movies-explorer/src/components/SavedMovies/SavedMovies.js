@@ -2,7 +2,10 @@ import './SavedMovies.css';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 
-const SavedMovies = ({ savedMovies, isLoadingFilmSuccess }) => {
+const SavedMovies = ({ handleSaveMovie,
+  handleDeleteMovie,
+  savedMovies,
+  isLoadingFilmSuccess }) => {
 
 
 
@@ -11,6 +14,8 @@ const SavedMovies = ({ savedMovies, isLoadingFilmSuccess }) => {
       <SearchForm />
       <MoviesCardList
         movies={savedMovies}
+        handleSaveMovie={handleSaveMovie}
+        handleDeleteMovie={handleDeleteMovie}
         isLoadingFilmSuccess={isLoadingFilmSuccess} />
     </section>
   )

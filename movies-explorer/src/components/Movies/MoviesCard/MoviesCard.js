@@ -35,9 +35,14 @@ const MoviesCard = ({ movie,
       ? setIsClickSaveButton(false)
       : setIsClickSaveButton(true)
 
-    isClickSaveButton
-      ? handleDeleteMovie({ nameRU })
-      : handleSaveMovie({ movie })
+    pathname === "/saved-movies"
+      ? isClickSaveButton
+        ? handleSaveMovie({ movie })
+        : handleDeleteMovie({ nameRU })
+      : isClickSaveButton
+        ? handleDeleteMovie({ nameRU })
+        : handleSaveMovie({ movie })
+
   }
 
   return (
