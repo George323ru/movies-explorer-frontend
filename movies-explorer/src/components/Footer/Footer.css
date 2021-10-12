@@ -31,6 +31,8 @@
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #e8e8e8;
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 
 .footer__links {

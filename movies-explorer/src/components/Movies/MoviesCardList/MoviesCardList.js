@@ -40,37 +40,38 @@ const MoviesCardList = ({ movies,
   return (
     <>
       {<section className="movies-card-list">
-        {isLoadingFilmSuccess ? (<>
-          {
-            movies.length > 0
-              ? (
-                <>
-                  <ul className="movies-card-list__container">
-                    {movies.map((movie, id) => (
-                      <Card
-                        key={id}
-                        movie={movie}
-                        handleSaveMovie={handleSaveMovie}
-                        handleDeleteMovie={handleDeleteMovie}
-                      />
-                    )).slice(0, cardsLimit)}
-                  </ul>
-                  {cardsLimit <= movies.length && (
-                    <div className="movies-card-list__pagination">
-                      <button
-                        className="movies-card-list__append-button"
-                        onClick={showMoreCards}>
-                        Еще
-                      </button>
-                    </div>
-                  )}
-                </>
-              )
-              : (<p className="movies-card-list__caption">
-                Ничего не найдено
-              </p>)
-          }
-        </>)
+        {isLoadingFilmSuccess
+          ? (<>
+            {
+              movies.length > 0
+                ? (
+                  <>
+                    <ul className="movies-card-list__container">
+                      {movies.map((movie, id) => (
+                        <Card
+                          key={id}
+                          movie={movie}
+                          handleSaveMovie={handleSaveMovie}
+                          handleDeleteMovie={handleDeleteMovie}
+                        />
+                      )).slice(0, cardsLimit)}
+                    </ul>
+                    {cardsLimit <= movies.length && (
+                      <div className="movies-card-list__pagination">
+                        <button
+                          className="movies-card-list__append-button"
+                          onClick={showMoreCards}>
+                          Еще
+                        </button>
+                      </div>
+                    )}
+                  </>
+                )
+                : (<p className="movies-card-list__caption">
+                  Ничего не найдено
+                </p>)
+            }
+          </>)
           : (<p className="movies-card-list__caption">
             Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.
           </p>)}

@@ -22,6 +22,9 @@ const App = () => {
     id: "",
     email: "",
   });
+
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const history = useHistory();
 
   const handleError = () => (err) => console.error(err);
@@ -86,6 +89,7 @@ const App = () => {
   };
 
   const handleSaveMovie = ({ movie }) => {
+    setIsLoadingFilmSuccess(false)
     const {
       country,
       director,
@@ -115,9 +119,11 @@ const App = () => {
         }
       )
       .then((res) => {
-        console.log(res)
+        setIsLoadingFilmSuccess(true)
+        setSavedMovies([res, ...savedMovies])
       })
   }
+  console.log(savedMovies)
 
   const handleDeleteMovie = ({ id }) => {
     console.log(id)
@@ -137,11 +143,15 @@ const App = () => {
         <Route path='/movies'>
           <Movies
             handleError={handleError}
-            handleSaveMovie={handleSaveMovie} handleDeleteMovie={handleDeleteMovie} />
+            handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}
+          />
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies
             handleDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
+            isLoadingFilmSuccess={isLoadingFilmSuccess}
           />
         </Route>
         <Route path='/profile'>

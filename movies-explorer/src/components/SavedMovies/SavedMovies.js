@@ -2,14 +2,16 @@ import './SavedMovies.css';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 
-const SavedMovies = () => {
+const SavedMovies = ({ savedMovies, isLoadingFilmSuccess }) => {
 
 
 
   return (
     <section className={``}>
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList
+        movies={savedMovies}
+        isLoadingFilmSuccess={isLoadingFilmSuccess} />
     </section>
   )
 }

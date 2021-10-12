@@ -54,7 +54,9 @@ const MoviesCard = ({ movie,
         rel="noreferrer">
         <img
           className="movies-card__image"
-          src={`https://api.nomoreparties.co${image.url}`}
+          src={pathname === "/saved-movies"
+            ? image :
+            `https://api.nomoreparties.co${image.url}`}
           alt="Картинка фильма" />
       </a>
       <button
