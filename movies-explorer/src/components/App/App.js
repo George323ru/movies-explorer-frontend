@@ -13,6 +13,7 @@ import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import * as auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -148,46 +149,48 @@ const App = () => {
 
 
   return (
-    <div className="page">
-      <Header />
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Header />
 
-      <Switch>
-        <Route exact path='/'>
-          <Main />
-        </Route>
-        <Route path='/movies'>
-          <Movies
-            handleError={handleError}
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}
-          />
-        </Route>
-        <Route path='/saved-movies'>
-          <SavedMovies
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}
-            savedMovies={savedMovies}
-            isLoadingFilmSuccess={isLoadingFilmSuccess}
-          />
-        </Route>
-        <Route path='/profile'>
-          <Profile />
-        </Route>
-        <Route path='/sign-in'>
-          <Login handleLogin={handleLogin} />
-        </Route>
-        <Route path='/sign-up'>
-          <Register handleRegister={handleRegister} />
-        </Route>
-        <Route path='*'>
-          <NotFoundPage />
-        </Route>
-        <Route path="/">
-          {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+        <Switch>
+          <Route exact path='/'>
+            <Main />
+          </Route>
+          <Route path='/movies'>
+            <Movies
+              handleError={handleError}
+              handleSaveMovie={handleSaveMovie}
+              handleDeleteMovie={handleDeleteMovie}
+            />
+          </Route>
+          <Route path='/saved-movies'>
+            <SavedMovies
+              handleSaveMovie={handleSaveMovie}
+              handleDeleteMovie={handleDeleteMovie}
+              savedMovies={savedMovies}
+              isLoadingFilmSuccess={isLoadingFilmSuccess}
+            />
+          </Route>
+          <Route path='/profile'>
+            <Profile />
+          </Route>
+          <Route path='/sign-in'>
+            <Login handleLogin={handleLogin} />
+          </Route>
+          <Route path='/sign-up'>
+            <Register handleRegister={handleRegister} />
+          </Route>
+          <Route path='*'>
+            <NotFoundPage />
+          </Route>
+          <Route path="/">
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

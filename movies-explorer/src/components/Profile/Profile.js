@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
 const Profile = () => {
+
+  const currentUser = useContext(CurrentUserContext);
   return (
     <section className="profile">
       <div className="profile__container">
         <form className="profile__form">
-          <h3 className="profile__title">Привет, Виталий!</h3>
+          <h3 className="profile__title">{`Привет, ${currentUser.name}!`}</h3>
           <div className="profile__input-field">
             <label className="profile__label" htmlFor="name">Имя</label>
             <input
@@ -15,6 +19,7 @@ const Profile = () => {
               minLength='2'
               maxLength='200'
               name='name'
+              value={currentUser.name}
               className='profile__input'
               id="name"
             />
@@ -27,6 +32,7 @@ const Profile = () => {
               minLength='2'
               maxLength='200'
               name='email'
+              value={currentUser.email}
               className='profile__input'
               id="email"
             />
