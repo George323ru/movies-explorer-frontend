@@ -1,9 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import useFormWithValidation from "../../utils/useFormWithValidation";
 import "./Profile.css";
 
 const Profile = () => {
+
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+  } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
   return (
@@ -14,26 +23,30 @@ const Profile = () => {
           <div className="profile__input-field">
             <label className="profile__label" htmlFor="name">Имя</label>
             <input
+              className='profile__input'
               type='text'
               required
               minLength='2'
-              maxLength='200'
+              maxLength='25'
               name='name'
-              value={currentUser.name}
-              className='profile__input'
+              placeholder={currentUser.name}
+              value={values.name || ""}
+              onChange={handleChange}
               id="name"
             />
           </div>
           <div className="profile__input-field">
             <label className="profile__label" htmlFor="email">E-mail</label>
             <input
+              className='profile__input'
               type='email'
               required
-              minLength='2'
-              maxLength='200'
+              minLength='4'
+              maxLength='35'
               name='email'
-              value={currentUser.email}
-              className='profile__input'
+              placeholder={currentUser.email}
+              value={values.email || ""}
+              onChange={handleChange}
               id="email"
             />
           </div>
