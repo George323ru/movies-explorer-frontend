@@ -29,18 +29,16 @@
   line-height: 29px;
 }
 
+.profile__input-field:first-child {
+}
+
 .profile__input-field {
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  border-bottom: 1px solid #e8e8e8;
-  margin-top: 25px;
-}
 
-.profile__input-field:first-of-type {
-  border-bottom: none;
-  margin-top: 0;
+  margin-top: 25px;
 }
 
 .profile__input-wrapper {
@@ -119,7 +117,7 @@
 .profile__button {
   margin-top: 220px;
   font-weight: normal;
-  color: #000000;
+  color: #c8c8c8;
   border: none;
   outline: none;
   background: none;

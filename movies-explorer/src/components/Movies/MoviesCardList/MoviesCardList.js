@@ -17,7 +17,7 @@ const MoviesCardList = ({ movies,
       maxCardNumber = 12;
       countAddCard = 3;
       break;
-    case screenWidth < 1279 && screenWidth > 786:
+    case screenWidth < 1133 && screenWidth > 786:
       maxCardNumber = 8;
       countAddCard = 2;
       break;
@@ -35,6 +35,7 @@ const MoviesCardList = ({ movies,
   const showMoreCards = () => {
     setCardsLimit((i) => i + countAddCard)
   }
+  console.log(movies)
 
   return (
     <>
@@ -69,6 +70,7 @@ const MoviesCardList = ({ movies,
                 : (<p className="movies-card-list__caption">
                   Ничего не найдено
                 </p>)
+
             }
           </>)
           : (<p className="movies-card-list__caption">

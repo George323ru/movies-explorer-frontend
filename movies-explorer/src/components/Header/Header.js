@@ -10,7 +10,7 @@ import Navigation from '../Navigation/Navigation';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ isLogin }) => {
 
   const { pathname } = useLocation();
 
@@ -60,7 +60,7 @@ const Header = () => {
           <img className="header__logo" src={logo} alt="Логотип" />
         </Link>
 
-        <Navigation />
+        <Navigation isLogin={isLogin} />
       </div>
     </header>
   )

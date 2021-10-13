@@ -31,8 +31,6 @@ const Movies = ({
       : setIsCheckboxShortFilm(true)
   }
 
-
-
   useEffect(() => {
 
     if (movieInput === "") {
@@ -68,8 +66,13 @@ const Movies = ({
   useEffect(() => {
     const storageFilm = JSON.parse(localStorage.getItem("savedMovies"));
 
-    setMovies(storageFilm)
+    if (storageFilm !== null) {
+      setMovies(storageFilm)
+    }
+
   }, [pathname])
+
+  console.log(movies)
 
   return (
     <section className="movies">

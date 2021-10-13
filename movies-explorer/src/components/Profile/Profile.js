@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormWithValidation from "../../utils/useFormWithValidation";
 import "./Profile.css";
+import "./_active/profile__button_active.css"
 
-const Profile = () => {
+const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
 
   const {
     values,
@@ -14,11 +15,21 @@ const Profile = () => {
     resetForm,
   } = useFormWithValidation();
 
+  console.log(values)
   const currentUser = useContext(CurrentUserContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUpdateUserInfo(values)
+  }
+
+  useEffect(() => { }, [currentUser]);
+
   return (
     <section className="profile">
       <div className="profile__container">
-        <form className="profile__form">
+        <form className="profile__form"
+          onSubmit={handleSubmit}>
           <h3 className="profile__title">{`Привет, ${currentUser.name}!`}</h3>
           <div className="profile__input-wrapper">
             <div className="profile__input-field">
@@ -60,10 +71,16 @@ const Profile = () => {
               {errors.email}
             </span>
           </div>
-          <button className='profile__button' type='submit'>
+          <button
+            className={`profile__button ${isValid
+              ? "profile__button_active"
+              : ""}`}
+            disabled={isValid === false && true}
+            type='submit'>
             Редактировать
           </button>
-          <Link className='profile__link-logout' to='/sign-up'>
+          <Link className='profile__link-logout' to='/sign-up'
+            onClick={handleLogOut}>
             Выйти из аккаунта
           </Link>
         </form>

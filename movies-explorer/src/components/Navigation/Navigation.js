@@ -5,40 +5,34 @@ import "./_opened/navigation_opened.css";
 import accauntLogo from "../../images/icon-accaunt.svg";
 import { useState } from "react";
 
-const Navigation = () => {
+const Navigation = ({ isLogin }) => {
 
   const [clickMenuBurger, setClickMenuBurger] = useState(false);
   const { pathname } = useLocation();
 
-  const accauntLinksHidden = `${pathname === "/" ? "navigation_hidden" : ""}`;
-
-  const navLinksHidden = `${pathname === "/sign-in" || pathname === "/sign-up"
+  const navLinksHidden = `${pathname === "/sign-in"
+    || pathname === "/sign-up"
     ? "navigation_hidden"
     : ""
     }`;
-
-  const authLinksHidden = `${pathname === "/movies" ||
-    pathname === "/saved-movies" ||
-    pathname === "/profile"
-    ? "navigation_hidden"
-    : ""
-    }`;
-
-
 
   const handleClickMenuBurger = () => {
-    if (clickMenuBurger) {
-      setClickMenuBurger(false);
-    } else {
-      setClickMenuBurger(true);
-    }
+    clickMenuBurger
+      ? setClickMenuBurger(false)
+      : setClickMenuBurger(true)
   };
+
+  console.log(isLogin)
 
   return (
     <nav className={`navigation ${navLinksHidden}`}>
 
-      <div className={`navigation__burger-button ${accauntLinksHidden}`}>
-        <input id="navigation__menu-toggle" type="checkbox" />
+      <div
+        className={`navigation__burger-button 
+      `}>
+        <input
+          id="navigation__menu-toggle"
+          type="checkbox" />
         <label
           onClick={handleClickMenuBurger}
           className="navigation__menu-btn"
@@ -47,7 +41,8 @@ const Navigation = () => {
         </label>
       </div>
 
-      <ul className={`navigation__links ${authLinksHidden}`}>
+      <ul className={`navigation__links 
+      ${isLogin && "navigation_hidden"}`}>
         <li className="navigation__links-item ">
           <Link className="navigation__register-link" to="/sign-up">
             Регистрация
@@ -59,25 +54,45 @@ const Navigation = () => {
           </Link>
         </li>
       </ul>
-      <div className={`navigation__sublayer ${!clickMenuBurger ? "navigation_hidden" : ""}`}></div>
-      <ul className={`navigation__links navigation__links_column navigation__links_visibility_off ${accauntLinksHidden} ${clickMenuBurger ? "navigation_opened" : ""}`}>
-        <li className="navigation__links-item navigation_hidden-link navigation__links-item_margin_null">
-          <Link className="navigation__main-link" to="/">
+
+      <div className={`navigation__sublayer 
+      ${!clickMenuBurger && "navigation_hidden"}`}></div>
+      <ul className={`navigation__links 
+      navigation__links_column 
+      navigation__links_visibility_off 
+     ${!isLogin && "navigation_hidden"}
+      ${clickMenuBurger && "navigation_opened"}`}>
+        <li className="navigation__links-item 
+        navigation_hidden-link 
+        navigation__links-item_margin_null">
+          <Link
+            className="navigation__main-link"
+            to="/">
             Главная
           </Link>
         </li>
-        <li className="navigation__links-item navigation__links-item_direction_column navigation__links-item_margin_null">
-          <Link className="navigation__movies-link" to="/movies">
+        <li
+          className="navigation__links-item navigation__links-item_direction_column navigation__links-item_margin_null">
+          <Link
+            className="navigation__movies-link"
+            to="/movies">
             Фильмы
           </Link>
-          <Link className="navigation__save-films-link" to="/saved-movies">
+          <Link
+            className="navigation__save-films-link"
+            to="/saved-movies">
             Сохранённые фильмы
           </Link>
         </li>
         <li className="navigation__links-item">
-          <Link className="navigation__profile-link" to="/profile">
+          <Link
+            className="navigation__profile-link"
+            to="/profile">
             Аккаунт
-            <img className="navigation__accaunt-image" src={accauntLogo} alt="Логотип аккаунта"></img>
+            <img
+              className="navigation__accaunt-image"
+              src={accauntLogo}
+              alt="Логотип аккаунта" />
           </Link>
         </li>
       </ul>

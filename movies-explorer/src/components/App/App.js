@@ -89,6 +89,29 @@ const App = () => {
       .catch(handleError);
   };
 
+  const handleLogOut = () => {
+
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("savedMovies");
+    mainApi.removeItemToken();
+    setLoggedIn(false);
+    history.push("/sign-in");
+
+  };
+
+  const handleUpdateUserInfo = (data) => {
+    console.log(data)
+    mainApi
+      .updateUserInfo(data)
+      .then((res) => {
+        console.log(currentUser)
+        setCurrentUser(res)
+      })
+      .catch((err) =>
+        console.log("Ошибка при отправке новых данных о пользователе, " + err))
+  };
+
+
   useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
@@ -135,7 +158,6 @@ const App = () => {
         setSavedMovies([res, ...savedMovies])
       })
   }
-  console.log(savedMovies)
 
   const handleDeleteMovie = ({ nameRU }) => {
     let movieId = savedMovies.find((item) => item.nameRU === nameRU)
@@ -151,7 +173,7 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header isLogin={loggedIn} />
 
         <Switch>
           <Route exact path='/'>
@@ -173,7 +195,9 @@ const App = () => {
             />
           </Route>
           <Route path='/profile'>
-            <Profile />
+            <Profile
+              handleUpdateUserInfo={handleUpdateUserInfo}
+              handleLogOut={handleLogOut} />
           </Route>
           <Route path='/sign-in'>
             <Login handleLogin={handleLogin} />
