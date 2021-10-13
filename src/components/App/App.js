@@ -180,25 +180,27 @@ const App = () => {
           <Route exact path='/'>
             <Main />
           </Route>
-          <ProtectedRoute path='/movies'>
-            <Movies
-              handleError={handleError}
-              handleSaveMovie={handleSaveMovie}
-              handleDeleteMovie={handleDeleteMovie}
-            />
+          <ProtectedRoute
+            path='/movies'
+            component={Movies}
+            loggedIn={loggedIn}
+            handleError={handleError}
+            handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}>
           </ProtectedRoute>
-          <ProtectedRoute path='/saved-movies'>
-            <SavedMovies
-              handleSaveMovie={handleSaveMovie}
-              handleDeleteMovie={handleDeleteMovie}
-              savedMovies={savedMovies}
-              isLoadingFilmSuccess={isLoadingFilmSuccess}
-            />
+          <ProtectedRoute path='/saved-movies'
+            component={SavedMovies}
+            loggedIn={loggedIn}
+            handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
+            isLoadingFilmSuccess={isLoadingFilmSuccess}>
           </ProtectedRoute>
-          <ProtectedRoute path='/profile'>
-            <Profile
-              handleUpdateUserInfo={handleUpdateUserInfo}
-              handleLogOut={handleLogOut} />
+          <ProtectedRoute path='/profile'
+            component={Profile}
+            loggedIn={loggedIn}
+            handleUpdateUserInfo={handleUpdateUserInfo}
+            handleLogOut={handleLogOut}>
           </ProtectedRoute>
           <Route path='/sign-in'>
             <Login handleLogin={handleLogin} />
