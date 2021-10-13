@@ -22,8 +22,6 @@ const Navigation = ({ isLogin }) => {
       : setClickMenuBurger(true)
   };
 
-  console.log(isLogin)
-
   return (
     <nav className={`navigation ${navLinksHidden}`}>
 
