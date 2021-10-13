@@ -1,6 +1,6 @@
 import "./MoviesCard.css";
 import "./_active/movies-card_active.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import iconSave from "../../../images/icon-save.svg";
 import iconDeleteCard from "../../../images/icon-delete.svg";
 import { useLocation } from "react-router";
@@ -14,8 +14,9 @@ const MoviesCard = ({ movie,
       duration,
       image,
       trailerLink,
+      isSaved
     } = movie;
-
+  console.log(isSaved)
   const { pathname } = useLocation();
 
   const [isClickSaveButton, setIsClickSaveButton] = useState(false)
@@ -26,15 +27,19 @@ const MoviesCard = ({ movie,
       ? setIsClickSaveButton(false)
       : setIsClickSaveButton(true)
 
-    pathname === "/saved-movies"
-      ? isClickSaveButton
+    if (pathname === "/saved-movies") {
+      isClickSaveButton
         ? handleSaveMovie({ movie })
         : handleDeleteMovie({ nameRU })
-      : isClickSaveButton
+
+    } else if (pathname === "/movies") {
+      isClickSaveButton
         ? handleDeleteMovie({ nameRU })
         : handleSaveMovie({ movie })
-
+    }
   }
+
+
 
   return (
 
@@ -51,14 +56,14 @@ const MoviesCard = ({ movie,
         <img
           className="movies-card__image"
           src={pathname === "/saved-movies"
-            ? image :
-            `https://api.nomoreparties.co${image.url}`}
+            ? image
+            : `https://api.nomoreparties.co${image.url}`}
           alt="Картинка фильма" />
       </a>
       <button
         className={pathname === "/saved-movies"
           ? "movies-card__button"
-          : `movies-card__button ${isClickSaveButton
+          : `movies-card__button ${isClickSaveButton || isSaved
             ? "movies-card_active"
             : ""}`}
         onClick={handleClickSaveButton}>
@@ -67,9 +72,9 @@ const MoviesCard = ({ movie,
           ? (
             <img className="movies-card__button-icon"
               src={iconDeleteCard}
-              alt="Кнопка сохранения карточки" />
+              alt="Кнопка удаления карточки" />
           )
-          : isClickSaveButton
+          : isClickSaveButton || isSaved
             ? (
               <img className="movies-card__button-icon"
                 src={iconSave}
@@ -79,7 +84,6 @@ const MoviesCard = ({ movie,
 
       </button>
     </li>
-
   );
 };
 

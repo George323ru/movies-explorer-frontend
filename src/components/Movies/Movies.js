@@ -11,19 +11,51 @@ import { useLocation } from "react-router";
 const Movies = ({
   handleError,
   handleSaveMovie,
-  handleDeleteMovie }) => {
+  handleDeleteMovie,
+  savedMovies }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false)
   const [movies, setMovies] = useState([]);
   const [movieInput, setMovieInput] = useState("");
+  const [savedMovie, setSavedMovie] = useState('')
 
   const { pathname } = useLocation();
 
   const getMovieSearchInput = (dataInput) => {
     setMovieInput(dataInput.toLowerCase())
   }
+
+  // const handleSaveMovieActive = (movie) => {
+  //   setSavedMovie(movie)
+  // }
+
+  useEffect(() => {
+    const storageFilm = JSON.parse(localStorage.getItem("savedMovies"));
+
+    const filteredFilm = storageFilm.map((item) => {
+      let isSaved;
+
+      if (savedMovies.find((i) => i.nameRU === item.nameRU)) {
+        isSaved = true;
+      } else {
+        isSaved = false;
+      }
+
+      item.isSaved = isSaved;
+      return item
+    }
+    )
+
+    setMovies(filteredFilm)
+
+    localStorage.setItem(
+      "savedMovies",
+      JSON.stringify(filteredFilm)
+    );
+
+  }, [savedMovies])
 
   const handleCheckboxShortFilm = () => {
     isCheckboxShortFilm
@@ -47,7 +79,6 @@ const Movies = ({
 
           const foundMovies = searchFilm(dataFilms, movieInput)
 
-
           localStorage.setItem(
             "savedMovies",
             JSON.stringify(foundMovies)
@@ -61,7 +92,22 @@ const Movies = ({
         })
     }
 
-  }, [movieInput, isCheckboxShortFilm])
+  }, [movieInput])
+
+  useEffect(() => {
+
+    const storageFilm = JSON.parse(localStorage.getItem("savedMovies"));
+    const shotrFilms = filterShotFilms(storageFilm)
+
+    const filterMovies =
+      isCheckboxShortFilm === true
+        ? shotrFilms
+        : storageFilm;
+
+    if (storageFilm) {
+      setMovies(filterMovies)
+    }
+  }, [isCheckboxShortFilm]);
 
   useEffect(() => {
     const storageFilm = JSON.parse(localStorage.getItem("savedMovies"));

@@ -173,9 +173,9 @@ const App = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+
       <div className="page">
         <Header isLogin={loggedIn} />
-
         <Switch>
           <Route exact path='/'>
             <Main />
@@ -184,6 +184,7 @@ const App = () => {
             path='/movies'
             component={Movies}
             loggedIn={loggedIn}
+            savedMovies={savedMovies}
             handleError={handleError}
             handleSaveMovie={handleSaveMovie}
             handleDeleteMovie={handleDeleteMovie}>
