@@ -20,35 +20,45 @@ const Profile = () => {
       <div className="profile__container">
         <form className="profile__form">
           <h3 className="profile__title">{`Привет, ${currentUser.name}!`}</h3>
-          <div className="profile__input-field">
-            <label className="profile__label" htmlFor="name">Имя</label>
-            <input
-              className='profile__input'
-              type='text'
-              required
-              minLength='2'
-              maxLength='25'
-              name='name'
-              placeholder={currentUser.name}
-              value={values.name || ""}
-              onChange={handleChange}
-              id="name"
-            />
+          <div className="profile__input-wrapper">
+            <div className="profile__input-field">
+              <label className="profile__label" htmlFor="name">Имя</label>
+              <input
+                className='profile__input'
+                type='text'
+                required
+                minLength='2'
+                maxLength='25'
+                name='name'
+                placeholder={currentUser.name}
+                value={values.name || ""}
+                onChange={handleChange}
+                id="name"
+              />
+            </div>
+            <span className="profile__input-error">
+              {errors.name}
+            </span>
           </div>
-          <div className="profile__input-field">
-            <label className="profile__label" htmlFor="email">E-mail</label>
-            <input
-              className='profile__input'
-              type='email'
-              required
-              minLength='4'
-              maxLength='35'
-              name='email'
-              placeholder={currentUser.email}
-              value={values.email || ""}
-              onChange={handleChange}
-              id="email"
-            />
+          <div className="profile__input-wrapper">
+            <div className="profile__input-field">
+              <label className="profile__label" htmlFor="email">E-mail</label>
+              <input
+                className='profile__input'
+                type='email'
+                required
+                minLength='4'
+                maxLength='35'
+                name='email'
+                placeholder={currentUser.email}
+                value={values.email || ""}
+                onChange={handleChange}
+                id="email"
+              />
+            </div>
+            <span className="profile__input-error">
+              {errors.email}
+            </span>
           </div>
           <button className='profile__button' type='submit'>
             Редактировать

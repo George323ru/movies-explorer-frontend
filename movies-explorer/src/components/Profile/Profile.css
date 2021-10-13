@@ -35,10 +35,27 @@
   align-items: center;
   box-sizing: border-box;
   border-bottom: 1px solid #e8e8e8;
+  margin-top: 25px;
 }
 
-.profile__input-field:last-of-type {
+.profile__input-field:first-of-type {
   border-bottom: none;
+  margin-top: 0;
+}
+
+.profile__input-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e8e8e8;
+  margin-bottom: 16px;
+}
+
+.profile__input-wrapper:first-of-type {
+  border-top: 0;
+}
+
+.profile__input-wrapper:last-of-type {
+  margin-bottom: 0;
 }
 
 .profile__label {
@@ -48,7 +65,8 @@
 }
 
 .profile__input {
-  padding: 17px 0;
+  padding: 3px 0 3px;
+  box-sizing: border-box;
   text-align: right;
   outline: none;
   border: none;
@@ -88,6 +106,14 @@
 .profile__input:focus:-ms-input-placeholder {
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.profile__input-error {
+  height: 10px;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: end;
+  color: var(--main-color-accent);
 }
 
 .profile__button {
