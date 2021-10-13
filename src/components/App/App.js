@@ -14,6 +14,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import * as auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -179,26 +180,26 @@ const App = () => {
           <Route exact path='/'>
             <Main />
           </Route>
-          <Route path='/movies'>
+          <ProtectedRoute path='/movies'>
             <Movies
               handleError={handleError}
               handleSaveMovie={handleSaveMovie}
               handleDeleteMovie={handleDeleteMovie}
             />
-          </Route>
-          <Route path='/saved-movies'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/saved-movies'>
             <SavedMovies
               handleSaveMovie={handleSaveMovie}
               handleDeleteMovie={handleDeleteMovie}
               savedMovies={savedMovies}
               isLoadingFilmSuccess={isLoadingFilmSuccess}
             />
-          </Route>
-          <Route path='/profile'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/profile'>
             <Profile
               handleUpdateUserInfo={handleUpdateUserInfo}
               handleLogOut={handleLogOut} />
-          </Route>
+          </ProtectedRoute>
           <Route path='/sign-in'>
             <Login handleLogin={handleLogin} />
           </Route>
