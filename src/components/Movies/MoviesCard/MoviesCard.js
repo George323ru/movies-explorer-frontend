@@ -4,6 +4,7 @@ import { useState } from "react";
 import iconSave from "../../../images/icon-save.svg";
 import iconDeleteCard from "../../../images/icon-delete.svg";
 import { useLocation } from "react-router";
+import declinationTime from "../../../utils/declinationTime";
 
 const MoviesCard = ({ movie,
   handleSaveMovie,
@@ -18,6 +19,8 @@ const MoviesCard = ({ movie,
     } = movie;
 
   const { pathname } = useLocation();
+
+  const declinationMinute = declinationTime(duration, ['минута', 'минуты', 'минут']);
 
   const handleClickSaveButton = () => {
 
@@ -35,7 +38,7 @@ const MoviesCard = ({ movie,
     <li className="movies-card">
       <div className="movies-card__title-wrap">
         <h2 className="movies-card__title">{nameRU}</h2>
-        <p className="movies-card__duration">{`${duration} минут`}</p>
+        <p className="movies-card__duration">{`${duration} ${declinationMinute}`}</p>
       </div>
       <a
         className="movies-card__link-image"
