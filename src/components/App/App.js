@@ -158,7 +158,6 @@ const App = () => {
       })
   }
 
-  console.log(isLoading)
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
