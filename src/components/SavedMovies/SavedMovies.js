@@ -3,7 +3,6 @@ import './SavedMovies.css';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
-import moviesApi from '../../utils/MoviesApi';
 import filterShotFilms from '../../utils/filterShotFilms';
 import searchFilm from '../../utils/searchFilm';
 
@@ -29,6 +28,7 @@ const SavedMovies = ({ handleSaveMovie,
 
   useEffect(() => {
     setMovies(savedMovies)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -50,9 +50,8 @@ const SavedMovies = ({ handleSaveMovie,
   }, [movieInput])
 
   useEffect(() => {
-    console.log(savedMovies)
+
     const shotrFilms = filterShotFilms(savedMovies)
-    console.log(shotrFilms)
 
     const filterMovies =
       isCheckboxShortFilm === true
