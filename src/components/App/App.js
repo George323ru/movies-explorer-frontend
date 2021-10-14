@@ -33,7 +33,7 @@ const App = () => {
   }, []);
 
   const checkToken = () => {
-
+    setIsLoading(true);
     const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
@@ -42,7 +42,7 @@ const App = () => {
         .then((res) => {
           mainApi.setItemToken(jwt);
 
-          setIsLoading(true);
+          setIsLoading(false);
           setLoggedIn(true);
           history.push("/movies");
         })
