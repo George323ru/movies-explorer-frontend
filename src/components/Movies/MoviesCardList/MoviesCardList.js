@@ -7,6 +7,7 @@ const MoviesCardList = ({ movies,
   handleSaveMovie,
   handleDeleteMovie }) => {
 
+  // eslint-disable-next-line no-unused-vars
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   let maxCardNumber

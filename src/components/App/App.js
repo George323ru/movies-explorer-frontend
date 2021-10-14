@@ -39,7 +39,7 @@ const App = () => {
     if (jwt) {
       auth
         .checkToken(jwt)
-        .then((res) => {
+        .then(() => {
           mainApi.setItemToken(jwt);
 
           setIsLoading(false);
