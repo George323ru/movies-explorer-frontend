@@ -16,7 +16,7 @@ const MoviesCard = ({ movie,
       trailerLink,
       isSaved
     } = movie;
-  console.log(movie)
+
   const { pathname } = useLocation();
 
   const handleClickSaveButton = () => {

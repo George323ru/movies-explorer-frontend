@@ -35,7 +35,6 @@ const MoviesCardList = ({ movies,
   const showMoreCards = () => {
     setCardsLimit((i) => i + countAddCard)
   }
-  console.log(movies)
 
   return (
     <>

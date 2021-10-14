@@ -35,7 +35,7 @@ class MainApi {
 
   updateUserInfo(data) {
     const { name, email } = data;
-    console.log(name, email)
+
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {

@@ -15,11 +15,13 @@ import * as auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
+import Preloader from "../Movies/Preloader/Preloader";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const history = useHistory();
 
@@ -31,6 +33,7 @@ const App = () => {
   }, []);
 
   const checkToken = () => {
+
     const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
@@ -39,13 +42,13 @@ const App = () => {
         .then((res) => {
           mainApi.setItemToken(jwt);
 
+          setIsLoading(true);
           setLoggedIn(true);
           history.push("/movies");
         })
         .catch(handleError);
     } else {
       setLoggedIn(false);
-      console.log('Пустой токен');
     }
   };
 
@@ -87,11 +90,10 @@ const App = () => {
   };
 
   const handleUpdateUserInfo = (data) => {
-    console.log(data)
+
     mainApi
       .updateUserInfo(data)
       .then((res) => {
-        console.log(currentUser)
         setCurrentUser(res)
       })
       .catch((err) =>
@@ -153,56 +155,62 @@ const App = () => {
       .deleteMovie({ movieId })
       .then(() => {
         setSavedMovies(savedMovies.filter((item) => item._id !== movieId._id));
-        console.log(savedMovies)
       })
   }
 
-
+  console.log(isLoading)
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
       <div className="page">
         <Header isLogin={loggedIn} />
-        <Switch>
-          <Route exact path='/'>
-            <Main />
-          </Route>
-          <ProtectedRoute
-            path='/movies'
-            component={Movies}
-            loggedIn={loggedIn}
-            savedMovies={savedMovies}
-            handleError={handleError}
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}>
-          </ProtectedRoute>
-          <ProtectedRoute path='/saved-movies'
-            component={SavedMovies}
-            loggedIn={loggedIn}
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}
-            savedMovies={savedMovies}
-            isLoadingFilmSuccess={isLoadingFilmSuccess}>
-          </ProtectedRoute>
-          <ProtectedRoute path='/profile'
-            component={Profile}
-            loggedIn={loggedIn}
-            handleUpdateUserInfo={handleUpdateUserInfo}
-            handleLogOut={handleLogOut}>
-          </ProtectedRoute>
-          <Route path='/sign-in'>
-            <Login handleLogin={handleLogin} />
-          </Route>
-          <Route path='/sign-up'>
-            <Register handleRegister={handleRegister} />
-          </Route>
-          <Route path='*'>
-            <NotFoundPage />
-          </Route>
-          <Route path="/">
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
-          </Route>
-        </Switch>
+        {isLoading
+          ? <Preloader />
+          : (
+            <Switch>
+              <Route exact path='/'>
+                <Main />
+              </Route>
+              <ProtectedRoute
+                path='/movies'
+                component={Movies}
+                loggedIn={loggedIn}
+                savedMovies={savedMovies}
+                handleError={handleError}
+                handleSaveMovie={handleSaveMovie}
+                handleDeleteMovie={handleDeleteMovie}>
+              </ProtectedRoute>
+              <ProtectedRoute path='/saved-movies'
+                component={SavedMovies}
+                loggedIn={loggedIn}
+                handleSaveMovie={handleSaveMovie}
+                handleDeleteMovie={handleDeleteMovie}
+                savedMovies={savedMovies}
+                isLoadingFilmSuccess={isLoadingFilmSuccess}>
+              </ProtectedRoute>
+              <ProtectedRoute path='/profile'
+                component={Profile}
+                loggedIn={loggedIn}
+                handleUpdateUserInfo={handleUpdateUserInfo}
+                handleLogOut={handleLogOut}>
+              </ProtectedRoute>
+              <Route path='/sign-in'>
+                <Login handleLogin={handleLogin} />
+              </Route>
+              <Route path='/sign-up'>
+                <Register handleRegister={handleRegister} />
+              </Route>
+              <Route path='*'>
+                <NotFoundPage />
+              </Route>
+              <Route path="/">
+                {loggedIn
+                  ? <Redirect to="/movies" />
+                  : <Redirect to="/" />}
+              </Route>
+            </Switch>
+          )}
+
         <Footer />
       </div>
     </CurrentUserContext.Provider>

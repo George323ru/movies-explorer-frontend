@@ -48,7 +48,6 @@ const Movies = ({
           }
 
           const foundMovies = searchFilm(dataFilms, movieInput)
-          console.log(foundMovies)
           const filteredFilm = checkFilmLike(foundMovies, savedMovies)
 
           localStorage.setItem(
@@ -110,8 +109,6 @@ const Movies = ({
     }
 
   }, [pathname])
-
-  console.log(movies)
 
   return (
     <section className="movies">
