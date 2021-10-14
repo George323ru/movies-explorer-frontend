@@ -16,30 +16,19 @@ const MoviesCard = ({ movie,
       trailerLink,
       isSaved
     } = movie;
-  console.log(isSaved)
+  console.log(movie)
   const { pathname } = useLocation();
-
-  const [isClickSaveButton, setIsClickSaveButton] = useState(false)
 
   const handleClickSaveButton = () => {
 
-    isClickSaveButton
-      ? setIsClickSaveButton(false)
-      : setIsClickSaveButton(true)
-
-    if (pathname === "/saved-movies") {
-      isClickSaveButton
-        ? handleSaveMovie({ movie })
-        : handleDeleteMovie({ nameRU })
-
-    } else if (pathname === "/movies") {
-      isClickSaveButton
-        ? handleDeleteMovie({ nameRU })
-        : handleSaveMovie({ movie })
+    if (pathname === "/movies" && isSaved === true) {
+      handleDeleteMovie({ nameRU })
+    } else if (pathname === "/movies" && isSaved === false) {
+      handleSaveMovie({ movie })
+    } else {
+      handleDeleteMovie({ nameRU })
     }
   }
-
-
 
   return (
 
@@ -63,7 +52,7 @@ const MoviesCard = ({ movie,
       <button
         className={pathname === "/saved-movies"
           ? "movies-card__button"
-          : `movies-card__button ${isClickSaveButton || isSaved
+          : `movies-card__button ${isSaved
             ? "movies-card_active"
             : ""}`}
         onClick={handleClickSaveButton}>
@@ -74,7 +63,7 @@ const MoviesCard = ({ movie,
               src={iconDeleteCard}
               alt="Кнопка удаления карточки" />
           )
-          : isClickSaveButton || isSaved
+          : isSaved
             ? (
               <img className="movies-card__button-icon"
                 src={iconSave}

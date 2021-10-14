@@ -71,8 +71,13 @@ class MainApi {
     nameEN,
   }) {
 
+    let thumbnailUrl
+    if (image.formats !== undefined) {
+      thumbnailUrl = `https://api.nomoreparties.co${image.formats.thumbnail.url}`;
+    }
+
     const imageUrl = `https://api.nomoreparties.co${image.url}`;
-    const thumbnailUrl = `https://api.nomoreparties.co${image.formats.thumbnail.url}`;
+
 
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",

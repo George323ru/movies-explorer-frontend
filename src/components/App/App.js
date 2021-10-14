@@ -19,12 +19,6 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [register, setRegister] = useState(false);
-  const [userData, setUserData] = useState({
-    id: "",
-    email: "",
-  });
-
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const history = useHistory();
@@ -44,10 +38,7 @@ const App = () => {
         .checkToken(jwt)
         .then((res) => {
           mainApi.setItemToken(jwt);
-          setUserData({
-            id: res._id,
-            email: res.email,
-          });
+
           setLoggedIn(true);
           history.push("/movies");
         })
@@ -63,11 +54,7 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         const { email, _id } = res;
-        setUserData({
-          id: _id,
-          email: email,
-        });
-
+        setCurrentUser(email, _id)
         history.push("/sign-in");
       })
       .catch(handleError);
@@ -78,7 +65,6 @@ const App = () => {
     auth
       .authorize(email, password)
       .then((data) => {
-        console.log(data)
 
         if (data) {
           localStorage.setItem("jwt", data.token);
@@ -167,6 +153,7 @@ const App = () => {
       .deleteMovie({ movieId })
       .then(() => {
         setSavedMovies(savedMovies.filter((item) => item._id !== movieId._id));
+        console.log(savedMovies)
       })
   }
 
