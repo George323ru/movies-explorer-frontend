@@ -12,7 +12,6 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
     handleChange,
     errors,
     isValid,
-    resetForm,
   } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);

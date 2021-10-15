@@ -15,7 +15,6 @@ import * as auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
-import Preloader from "../Movies/Preloader/Preloader";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -208,7 +207,6 @@ const App = () => {
               : <Redirect to="/" />}
           </Route>
         </Switch>
-
 
         <Footer />
       </div>
