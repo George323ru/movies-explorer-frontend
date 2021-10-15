@@ -143,6 +143,7 @@ const App = () => {
         }
       )
       .then((res) => {
+        console.log(res)
         setIsLoadingFilmSuccess(true)
         setSavedMovies([res, ...savedMovies])
       })
@@ -163,52 +164,51 @@ const App = () => {
 
       <div className="page">
         <Header isLogin={loggedIn} />
-        {isLoading
-          ? <Preloader />
-          : (
-            <Switch>
-              <Route exact path='/'>
-                <Main />
-              </Route>
-              <ProtectedRoute
-                path='/movies'
-                component={Movies}
-                loggedIn={loggedIn}
-                savedMovies={savedMovies}
-                handleError={handleError}
-                handleSaveMovie={handleSaveMovie}
-                handleDeleteMovie={handleDeleteMovie}>
-              </ProtectedRoute>
-              <ProtectedRoute path='/saved-movies'
-                component={SavedMovies}
-                loggedIn={loggedIn}
-                handleSaveMovie={handleSaveMovie}
-                handleDeleteMovie={handleDeleteMovie}
-                savedMovies={savedMovies}
-                isLoadingFilmSuccess={isLoadingFilmSuccess}>
-              </ProtectedRoute>
-              <ProtectedRoute path='/profile'
-                component={Profile}
-                loggedIn={loggedIn}
-                handleUpdateUserInfo={handleUpdateUserInfo}
-                handleLogOut={handleLogOut}>
-              </ProtectedRoute>
-              <Route path='/sign-in'>
-                <Login handleLogin={handleLogin} />
-              </Route>
-              <Route path='/sign-up'>
-                <Register handleRegister={handleRegister} />
-              </Route>
-              <Route path='*'>
-                <NotFoundPage />
-              </Route>
-              <Route path="/">
-                {loggedIn
-                  ? <Redirect to="/movies" />
-                  : <Redirect to="/" />}
-              </Route>
-            </Switch>
-          )}
+
+
+        <Switch>
+          <Route exact path='/'>
+            <Main />
+          </Route>
+          <ProtectedRoute
+            path='/movies'
+            component={Movies}
+            loggedIn={loggedIn}
+            savedMovies={savedMovies}
+            handleError={handleError}
+            handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}>
+          </ProtectedRoute>
+          <ProtectedRoute path='/saved-movies'
+            component={SavedMovies}
+            loggedIn={loggedIn}
+            handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
+            isLoadingFilmSuccess={isLoadingFilmSuccess}>
+          </ProtectedRoute>
+          <ProtectedRoute path='/profile'
+            component={Profile}
+            loggedIn={loggedIn}
+            handleUpdateUserInfo={handleUpdateUserInfo}
+            handleLogOut={handleLogOut}>
+          </ProtectedRoute>
+          <Route path='/sign-in'>
+            <Login handleLogin={handleLogin} />
+          </Route>
+          <Route path='/sign-up'>
+            <Register handleRegister={handleRegister} />
+          </Route>
+          <Route path='*'>
+            <NotFoundPage />
+          </Route>
+          <Route path="/">
+            {loggedIn
+              ? <Redirect to="/movies" />
+              : <Redirect to="/" />}
+          </Route>
+        </Switch>
+
 
         <Footer />
       </div>

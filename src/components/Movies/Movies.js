@@ -24,7 +24,9 @@ const Movies = ({
   const { pathname } = useLocation();
 
   const getMovieSearchInput = (dataInput) => {
-    setMovieInput(dataInput.toLowerCase())
+    if (dataInput !== undefined) {
+      setMovieInput(dataInput.toLowerCase())
+    }
   }
 
   const handleCheckboxShortFilm = () => {

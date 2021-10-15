@@ -5,8 +5,8 @@ function searchFilm(data, movieInput) {
     const filmNameRU = item.nameRU && item.nameRU.toLowerCase();
 
     return (
-      filmNameRU && filmNameRU.includes(movieInput)
-      || filmNameEN && filmNameEN.includes(movieInput)
+      (filmNameRU && filmNameRU.includes(movieInput))
+      || (filmNameEN && filmNameEN.includes(movieInput))
     )
   })
 }

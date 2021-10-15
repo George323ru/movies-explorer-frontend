@@ -2,7 +2,6 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 import useFormWithValidation from "../../../utils/useFormWithValidation"
 import buttonImg from "../../../images/icon-find.svg";
-import { useState } from "react";
 
 const SearchForm = ({
   handleSearchInput,
@@ -12,19 +11,11 @@ const SearchForm = ({
     values,
     handleChange,
     errors,
-    isValid,
-    resetForm,
   } = useFormWithValidation();
-
-  const [movieInput, setMovieInput] = useState("");
-
-  const handleChangeMovie = (e) => {
-    setMovieInput(e.target.value);
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMovieInput(e.target.value);
+
     handleSearchInput(values.movieSearchInput)
   };
 
