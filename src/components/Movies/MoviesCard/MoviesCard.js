@@ -1,6 +1,5 @@
 import "./MoviesCard.css";
 import "./_active/movies-card_active.css"
-import { useState } from "react";
 import iconSave from "../../../images/icon-save.svg";
 import iconDeleteCard from "../../../images/icon-delete.svg";
 import { useLocation } from "react-router";
@@ -61,19 +60,16 @@ const MoviesCard = ({ movie,
         onClick={handleClickSaveButton}>
 
         {pathname === "/saved-movies"
-          ? (
-            <img className="movies-card__button-icon"
-              src={iconDeleteCard}
-              alt="Кнопка удаления карточки" />
+          ? (<img className="movies-card__button-icon"
+            src={iconDeleteCard}
+            alt="Кнопка удаления карточки" />
           )
           : isSaved
-            ? (
-              <img className="movies-card__button-icon"
-                src={iconSave}
-                alt="Кнопка сохранения карточки" />
+            ? (<img className="movies-card__button-icon"
+              src={iconSave}
+              alt="Кнопка сохранения карточки" />
             )
             : "Сохранить"}
-
       </button>
     </li>
   );

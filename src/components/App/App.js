@@ -82,7 +82,7 @@ const App = () => {
   const handleLogOut = () => {
 
     localStorage.removeItem("jwt");
-    localStorage.removeItem("savedMovies");
+    localStorage.removeItem("saveMovies");
     mainApi.removeItemToken();
     setLoggedIn(false);
     history.push("/sign-in");
