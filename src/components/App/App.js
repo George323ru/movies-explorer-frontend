@@ -20,7 +20,8 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEditSuccess, setIsEditSuccess] = useState(false)
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const history = useHistory();
 
@@ -207,6 +208,7 @@ const App = () => {
               : <Redirect to="/" />}
           </Route>
         </Switch>
+
 
         <Footer />
       </div>

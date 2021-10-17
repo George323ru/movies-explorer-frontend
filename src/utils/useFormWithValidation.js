@@ -7,10 +7,20 @@ export default function useFormWithValidation() {
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
+
     const { name, value } = event.target;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: event.target.validationMessage });
-    setIsValid(event.target.closest("form").checkValidity());
+
+    if (name === "email") {
+      let rex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+      console.log(rex)
+      setValues({ ...values, [name]: value });
+      setErrors({ ...errors, [name]: event.target.validationMessage });
+      setIsValid(rex);
+      console.log(isValid)
+    }
+    // setValues({ ...values, [name]: value });
+    // setErrors({ ...errors, [name]: event.target.validationMessage });
+    // setIsValid(event.target.closest("form").checkValidity());
   };
 
   const resetForm = useCallback(

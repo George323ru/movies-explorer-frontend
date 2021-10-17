@@ -12,6 +12,7 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
     handleChange,
     errors,
     isValid,
+
   } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
@@ -20,6 +21,8 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
     e.preventDefault();
     handleUpdateUserInfo(values)
   }
+
+
 
   useEffect(() => { }, [currentUser]);
 

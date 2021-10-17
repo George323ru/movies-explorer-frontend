@@ -21,9 +21,10 @@ const SavedMovies = ({ handleSaveMovie,
   }
 
   const handleCheckboxShortFilm = () => {
-    isCheckboxShortFilm
-      ? setIsCheckboxShortFilm(false)
-      : setIsCheckboxShortFilm(true)
+    isCheckboxShortFilm && setIsCheckboxShortFilm(true)
+    // isCheckboxShortFilm
+    //   ? setIsCheckboxShortFilm(false)
+    //   : setIsCheckboxShortFilm(true)
   }
 
   useEffect(() => {
