@@ -11,39 +11,43 @@ const SavedMovies = ({ handleSaveMovie,
   savedMovies,
   isLoadingFilmSuccess,
 }) => {
-
+console.log(savedMovies)
   const [movieInput, setMovieInput] = useState("");
   const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [isSearchActiv, setIsSearchActiv] = useState(false)
 
   const getMovieSearchInput = (dataInput) => {
     setMovieInput(dataInput.toLowerCase())
+    
   }
 
   const handleCheckboxShortFilm = () => {
-    isCheckboxShortFilm && setIsCheckboxShortFilm(true)
-    // isCheckboxShortFilm
-    //   ? setIsCheckboxShortFilm(false)
-    //   : setIsCheckboxShortFilm(true)
+    isCheckboxShortFilm
+      ? setIsCheckboxShortFilm(false)
+      : setIsCheckboxShortFilm(true)
   }
+
+  useEffect(()=>{
+    setIsSearchActiv(true)
+  },[])
 
   useEffect(() => {
     setMovies(savedMovies)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [savedMovies])
 
   useEffect(() => {
 
     if (movieInput === "") {
       return null;
     } else {
-      let dataFilms = savedMovies;
-
+      
       if (isCheckboxShortFilm) {
-        dataFilms = filterShotFilms(savedMovies)
+        filterShotFilms(savedMovies)
       }
 
-      const foundMovies = searchFilm(dataFilms, movieInput)
+      const foundMovies = searchFilm(savedMovies, movieInput)
 
       setMovies(foundMovies)
     }
@@ -70,6 +74,7 @@ const SavedMovies = ({ handleSaveMovie,
         handleCheckboxShortFilm={handleCheckboxShortFilm} />
       <MoviesCardList
         movies={movies}
+        isSearchActiv={isSearchActiv}
         handleSaveMovie={handleSaveMovie}
         handleDeleteMovie={handleDeleteMovie}
         isLoadingFilmSuccess={isLoadingFilmSuccess} />

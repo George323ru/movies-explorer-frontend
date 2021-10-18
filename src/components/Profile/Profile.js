@@ -5,14 +5,16 @@ import useFormWithValidation from "../../utils/useFormWithValidation";
 import "./Profile.css";
 import "./_active/profile__button_active.css"
 
-const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
+const Profile = ({ handleUpdateUserInfo, 
+  handleLogOut,
+  onEditSuccess,
+  onEditInfoUserMessage }) => {
 
   const {
     values,
     handleChange,
     errors,
     isValid,
-
   } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
@@ -22,9 +24,10 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
     handleUpdateUserInfo(values)
   }
 
-
-
-  useEffect(() => { }, [currentUser]);
+  useEffect(() => {}, [currentUser]);
+  useEffect(() => {
+    onEditInfoUserMessage()
+  }, [values]);
 
   return (
     <section className="profile">
@@ -39,11 +42,10 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
                 className='profile__input'
                 type='text'
                 required
-                minLength='2'
+                minLength='6'
                 maxLength='25'
-                name='name'
-                placeholder={currentUser.name}
-                value={values.name || ""}
+                name='name'                
+                value={values.name || currentUser.name}
                 onChange={handleChange}
                 id="name"
               />
@@ -62,8 +64,7 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
                 minLength='4'
                 maxLength='35'
                 name='email'
-                placeholder={currentUser.email}
-                value={values.email || ""}
+                value={values.email || currentUser.email}
                 onChange={handleChange}
                 id="email"
               />
@@ -72,12 +73,16 @@ const Profile = ({ handleUpdateUserInfo, handleLogOut }) => {
               {errors.email}
             </span>
           </div>
+          <span className={`proile__success-message 
+          ${onEditSuccess && "proile__success-message_active"}`}>
+            Успешно!
+          </span>
           <button
             className={`profile__button ${isValid
               ? "profile__button_active"
               : ""}`}
             disabled={isValid === false && true}
-            type='submit'>
+            type='submit'>              
             Редактировать
           </button>
           <Link className='profile__link-logout' to='/sign-up'

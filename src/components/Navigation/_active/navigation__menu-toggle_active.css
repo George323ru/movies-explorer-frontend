@@ -1,0 +1,16 @@
+
+.navigation__menu-toggle {
+  display: none;
+}
+
+.navigation__menu-toggle:checked ~ .navigation__menu-btn > span {
+  transform: rotate(45deg);
+}
+.navigation__menu-toggle:checked ~ .navigation__menu-btn > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+.navigation__menu-toggle:checked ~ .navigation__menu-btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}

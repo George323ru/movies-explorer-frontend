@@ -1,22 +1,24 @@
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
-import useFormWithValidation from "../../../utils/useFormWithValidation"
 import buttonImg from "../../../images/icon-find.svg";
+import { useState } from "react";
 
 const SearchForm = ({
   handleSearchInput,
   handleCheckboxShortFilm }) => {
 
-  const {
-    values,
-    handleChange,
-    errors,
-  } = useFormWithValidation();
+    const [movieInputSearch, setMovieInputSearch] = useState(" ");
+    const [errorMessage, setErrorMessage] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    handleSearchInput(values.movieSearchInput)
+  
+if(movieInputSearch === " " ){
+  setErrorMessage("Нужно ввести ключевое слово")    
+  } else {
+    handleSearchInput(movieInputSearch)
+    setErrorMessage("")
+  }
   };
 
   return (
@@ -29,8 +31,8 @@ const SearchForm = ({
           type="text"
           placeholder="Фильм"
           name="movieSearchInput"
-          value={values.movieSearchInput || ""}
-          onChange={handleChange}
+          value={movieInputSearch}
+          onChange={(e) => setMovieInputSearch(e.target.value)}         
           required />
         <button
           className="search-form__button"
@@ -40,7 +42,7 @@ const SearchForm = ({
             src={buttonImg}
             alt="Кнопка поиска"></img>
         </button>
-        <span className="search-form__caption">{errors.movieSearchInput}</span>
+        <span className="search-form__caption">{errorMessage}</span>
         <div className="search-form__checkbox-wrap">
           <FilterCheckbox
             onClick={handleCheckboxShortFilm} />

@@ -1,131 +1,108 @@
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import moviesApi from "../../utils/MoviesApi"
+
 import Preloader from "./Preloader/Preloader";
 import searchFilm from "../../utils/searchFilm";
 import filterShotFilms from "../../utils/filterShotFilms";
 import checkFilmLike from "../../utils/checkFilmLike";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 
 const Movies = ({
-  handleError,
+  movies,  
   handleSaveMovie,
   handleDeleteMovie,
-  savedMovies }) => {
-
-  const [isLoading, setIsLoading] = useState(false);
+  savedMovies,
+  onLoading,
+}) => {
+ 
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
-  const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false)
-  const [movies, setMovies] = useState([]);
+  const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false);
+  const [isSearchActiv, setIsSearchActiv] = useState(false)
+  const [moviesSearch, setMoviesSearch] = useState([]);
   const [movieInput, setMovieInput] = useState("");
-
-  const { pathname } = useLocation();
 
   const getMovieSearchInput = (dataInput) => {
     if (dataInput !== undefined) {
-      setMovieInput(dataInput.toLowerCase())
+      setMovieInput(dataInput.toLowerCase());
+      setIsSearchActiv(true)
     }
-  }
+  };
 
   const handleCheckboxShortFilm = () => {
     isCheckboxShortFilm
       ? setIsCheckboxShortFilm(false)
-      : setIsCheckboxShortFilm(true)
-  }
+      : setIsCheckboxShortFilm(true);
+  };
 
   useEffect(() => {
-
     if (movieInput === "") {
       return null;
     } else {
-      moviesApi.getBeatFilmMovies()
-        .then((res) => {
+      
+      if (isCheckboxShortFilm) {
+        filterShotFilms(movies);
+      }
 
-          let dataFilms = res;
+      const foundMovies = searchFilm(movies, movieInput);
+      const filteredFilm = checkFilmLike(foundMovies, savedMovies);
 
-          if (isCheckboxShortFilm) {
-            dataFilms = filterShotFilms(res)
-          }
-
-          const foundMovies = searchFilm(dataFilms, movieInput)
-          const filteredFilm = checkFilmLike(foundMovies, savedMovies)
-
-          localStorage.setItem(
-            "saveMovies",
-            JSON.stringify(filteredFilm)
-          );
-
-          setIsLoading(false)
-          setMovies(filteredFilm)
-        }).catch((err) => {
-          handleError(err)
-          setIsLoadingFilmSuccess(false)
-        })
+      setMoviesSearch(filteredFilm);
     }
-
-  }, [movieInput])
+  }, [movieInput]);
 
   useEffect(() => {
     const storageFilm = JSON.parse(localStorage.getItem("saveMovies"));
 
-    if (storageFilm !== null) {
+    if (movies !== null) {
+      const foundMovies = searchFilm(movies, movieInput);
+      const filteredFilm = checkFilmLike(foundMovies, savedMovies);
 
-      const filteredFilm = checkFilmLike(storageFilm, savedMovies)
+      setMoviesSearch(filteredFilm);
 
-      setMovies(filteredFilm)
-
-      localStorage.setItem(
-        "saveMovies",
-        JSON.stringify(filteredFilm)
-      );
+      localStorage.setItem("saveMovies", JSON.stringify(filteredFilm));
     }
-
-  }, [savedMovies])
+  }, [savedMovies]);
 
   useEffect(() => {
-
     const storageFilm = JSON.parse(localStorage.getItem("saveMovies"));
 
-    if (storageFilm !== null) {
-      const shotrFilms = filterShotFilms(storageFilm)
+    if (moviesSearch !== null) {
+ 
+      const shotrFilms = filterShotFilms(moviesSearch);
 
-      const filterMovies =
-        isCheckboxShortFilm === true
-          ? shotrFilms
-          : storageFilm;
+      let filterMovies 
 
-      if (storageFilm) {
-        setMovies(filterMovies)
+       if(isCheckboxShortFilm === true ) {
+        filterMovies = shotrFilms
+       } else{
+        filterMovies = searchFilm(movies, movieInput);
+       }
+
+      if (moviesSearch) {
+        setMoviesSearch(filterMovies);
       }
     }
-
   }, [isCheckboxShortFilm]);
-
-  useEffect(() => {
-    const storageFilm = JSON.parse(localStorage.getItem("saveMovies"));
-
-    if (storageFilm !== null) {
-      setMovies(storageFilm)
-    }
-
-  }, [pathname])
 
   return (
     <section className="movies">
       <div className="movies__container">
         <SearchForm
           handleSearchInput={getMovieSearchInput}
-          handleCheckboxShortFilm={handleCheckboxShortFilm} />
-        {isLoading
-          ? <Preloader />
-          : (<MoviesCardList
-            movies={movies}
+          handleCheckboxShortFilm={handleCheckboxShortFilm}
+        />
+        {onLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            movies={moviesSearch}            
+            isSearchActiv={isSearchActiv}
             isLoadingFilmSuccess={isLoadingFilmSuccess}
             handleSaveMovie={handleSaveMovie}
             handleDeleteMovie={handleDeleteMovie}
-          />)}
+          />
+        )}
       </div>
     </section>
   );

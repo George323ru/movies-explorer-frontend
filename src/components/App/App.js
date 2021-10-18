@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { Redirect, useHistory } from "react-router";
 import './App.css';
+import moviesApi from "../../utils/MoviesApi";
 import Header from '../Header/Header';
 import Movies from "../Movies/Movies";
 import Main from "../Main/Main";
@@ -19,9 +20,10 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEditSuccess, setIsEditSuccess] = useState(false)
+  const[isEditSuccess, setIsEditSuccess] = useState(false);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const history = useHistory();
 
@@ -57,8 +59,9 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         const { email, _id } = res;
+        setLoggedIn(true);
         setCurrentUser(email, _id)
-        history.push("/sign-in");
+        history.push("/movies");
       })
       .catch(handleError);
   };
@@ -85,9 +88,24 @@ const App = () => {
     localStorage.removeItem("saveMovies");
     mainApi.removeItemToken();
     setLoggedIn(false);
-    history.push("/sign-in");
+    history.push("/");
 
   };
+
+  
+  useEffect(() => {
+    setIsLoading(true)
+    moviesApi
+      .getBeatFilmMovies()
+      .then((films) => {
+        setMovies(films);
+      })
+      .catch((err) => {
+        setIsLoading(false)
+        handleError(err);
+        setIsLoadingFilmSuccess(false);
+      });
+  }, []);
 
   const handleUpdateUserInfo = (data) => {
 
@@ -95,10 +113,15 @@ const App = () => {
       .updateUserInfo(data)
       .then((res) => {
         setCurrentUser(res)
+        setIsEditSuccess(true)
       })
       .catch((err) =>
         console.log("Ошибка при отправке новых данных о пользователе, " + err))
   };
+
+  const handleEditInfoUserMessage = () =>{
+    setIsEditSuccess(false)
+  }
 
 
   useEffect(() => {
@@ -148,14 +171,17 @@ const App = () => {
         setSavedMovies([res, ...savedMovies])
       })
   }
-
+console.log(savedMovies)
   const handleDeleteMovie = ({ nameRU }) => {
+    console.log(nameRU)
     let movieId = savedMovies.find((item) => item.nameRU === nameRU)
-
+    
     mainApi
       .deleteMovie({ movieId })
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         setSavedMovies(savedMovies.filter((item) => item._id !== movieId._id));
+        console.log(savedMovies)
       })
   }
 
@@ -174,6 +200,8 @@ const App = () => {
             path='/movies'
             component={Movies}
             loggedIn={loggedIn}
+            movies={movies}
+            onLoading={isLoading}
             savedMovies={savedMovies}
             handleError={handleError}
             handleSaveMovie={handleSaveMovie}
@@ -190,6 +218,8 @@ const App = () => {
           <ProtectedRoute path='/profile'
             component={Profile}
             loggedIn={loggedIn}
+            onEditSuccess={isEditSuccess}
+            onEditInfoUserMessage={handleEditInfoUserMessage}
             handleUpdateUserInfo={handleUpdateUserInfo}
             handleLogOut={handleLogOut}>
           </ProtectedRoute>
@@ -208,7 +238,6 @@ const App = () => {
               : <Redirect to="/" />}
           </Route>
         </Switch>
-
 
         <Footer />
       </div>

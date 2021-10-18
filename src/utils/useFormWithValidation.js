@@ -7,20 +7,23 @@ export default function useFormWithValidation() {
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
-
     const { name, value } = event.target;
-
     if (name === "email") {
-      let rex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-      console.log(rex)
-      setValues({ ...values, [name]: value });
+      const regex = /.+@.+\.[A-Za-z]+$/.test(value);
+
+      if (!regex) {
+        setErrors({ ...errors, [name]: "Неправильный формат почты" });
+        setIsValid(regex);
+      } else {
+        setErrors({ ...errors, [name]: event.target.validationMessage });
+        setIsValid(event.target.closest("form").checkValidity());
+      }
+    } else {
       setErrors({ ...errors, [name]: event.target.validationMessage });
-      setIsValid(rex);
-      console.log(isValid)
+      setIsValid(event.target.closest("form").checkValidity());
     }
-    // setValues({ ...values, [name]: value });
-    // setErrors({ ...errors, [name]: event.target.validationMessage });
-    // setIsValid(event.target.closest("form").checkValidity());
+
+    setValues({ ...values, [name]: value });
   };
 
   const resetForm = useCallback(

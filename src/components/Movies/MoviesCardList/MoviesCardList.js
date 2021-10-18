@@ -1,17 +1,19 @@
 import "./MoviesCardList.css";
-import Card from '../MoviesCard/MoviesCard'
+import Card from "../MoviesCard/MoviesCard";
 import { useState } from "react";
 
-const MoviesCardList = ({ movies,
+const MoviesCardList = ({
+  movies,
+  isSearchActiv,
   isLoadingFilmSuccess,
   handleSaveMovie,
-  handleDeleteMovie }) => {
-
+  handleDeleteMovie,
+}) => {
   // eslint-disable-next-line no-unused-vars
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  let maxCardNumber
-  let countAddCard
+  let maxCardNumber;
+  let countAddCard;
 
   switch (true) {
     case screenWidth > 1133:
@@ -34,53 +36,59 @@ const MoviesCardList = ({ movies,
   const [cardsLimit, setCardsLimit] = useState(maxCardNumber);
 
   const showMoreCards = () => {
-    setCardsLimit((i) => i + countAddCard)
-  }
-
+    setCardsLimit((i) => i + countAddCard);
+  };
+  console.log(movies);
   return (
     <>
-      {<section className="movies-card-list">
-        {isLoadingFilmSuccess
-          ? (<>
-            {
-              movies.length > 0
-                ? (
+      {
+        <section className="movies-card-list">
+          {isLoadingFilmSuccess ? (
+            <>
+              {isSearchActiv ? (
+                movies.length > 0 ? (
                   <>
                     <ul className="movies-card-list__container">
-                      {movies.map((movie, id) => (
-                        <Card
-                          key={id}
-                          movie={movie}
-                          handleSaveMovie={handleSaveMovie}
-                          handleDeleteMovie={handleDeleteMovie}
-                        />
-                      )).slice(0, cardsLimit)}
+                      {movies
+                        .map((movie, id) => (
+                          <Card
+                            key={id}
+                            movie={movie}
+                            handleSaveMovie={handleSaveMovie}
+                            handleDeleteMovie={handleDeleteMovie}
+                          />
+                        ))
+                        .slice(0, cardsLimit)}
                     </ul>
                     <div className="movies-card-list__pagination">
                       {cardsLimit <= movies.length && (
                         <button
                           className="movies-card-list__append-button"
-                          onClick={showMoreCards}>
+                          onClick={showMoreCards}
+                        >
                           Еще
                         </button>
                       )}
                     </div>
                   </>
+                ) : (
+                  <p className="movies-card-list__caption">Ничего не найдено</p>
                 )
-                : (<p className="movies-card-list__caption">
-                  Ничего не найдено
-                </p>)
-
-            }
-          </>)
-          : (<p className="movies-card-list__caption">
-            Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.
-          </p>)}
-
-      </section>}
+              ) : (
+                ""
+              )}
+            </>
+          ) : (
+            <p className="movies-card-list__caption">
+              Во время запроса произошла ошибка. Возможно, проблема с
+              соединением или сервер недоступен. Подождите немного и попробуйте
+              ещё раз.
+            </p>
+          )}
+        </section>
+      }
     </>
-
-  )
+  );
 };
 
 export default MoviesCardList;

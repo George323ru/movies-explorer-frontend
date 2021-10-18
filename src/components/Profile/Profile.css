@@ -114,6 +114,20 @@
   color: var(--main-color-accent);
 }
 
+.proile__success-message{
+  visibility: hidden;
+  color: var(--main-color-third);
+  font-weight: normal;
+  text-align: center;
+  height: 15px;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.proile__success-message_active{
+  visibility: visible;
+}
+
 .profile__button {
   margin-top: 220px;
   font-weight: normal;
