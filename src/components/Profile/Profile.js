@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useFormWithValidation from "../../utils/useFormWithValidation";
@@ -18,6 +18,7 @@ const Profile = ({ handleUpdateUserInfo,
   } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
+  const [showMessage, setShowMessage] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,12 +29,13 @@ const Profile = ({ handleUpdateUserInfo,
     } else {
       handleUpdateUserInfo(values.name, values.email)
     }
-
+    setShowMessage(true)
   }
 
   useEffect(() => { }, [currentUser]);
   useEffect(() => {
     onEditInfoUserMessage()
+    setShowMessage(false)
   }, [values]);
 
   return (
@@ -42,53 +44,58 @@ const Profile = ({ handleUpdateUserInfo,
         <form className="profile__form"
           onSubmit={handleSubmit}>
           <h3 className="profile__title">{`Привет, ${currentUser.name}!`}</h3>
-          <div className="profile__input-wrapper">
-            <div className="profile__input-field">
-              <label className="profile__label" htmlFor="name">Имя</label>
-              <input
-                className='profile__input'
-                type='text'
-                required
-                minLength='6'
-                maxLength='25'
-                name='name'
-                value={values.name || currentUser.name}
-                onChange={handleChange}
-                id="name"
-              />
-            </div>
-            <span className="profile__input-error">
-              {errors.name}
-            </span>
-          </div>
-          <div className="profile__input-wrapper">
-            <div className="profile__input-field">
-              <label className="profile__label" htmlFor="email">E-mail</label>
-              <input
-                className='profile__input'
-                type='email'
-                required
-                minLength='4'
-                maxLength='35'
-                name='email'
-                value={values.email || currentUser.email}
-                onChange={handleChange}
-                id="email"
-              />
-            </div>
-            <span className="profile__input-error">
-              {errors.email}
-            </span>
-          </div>
+          <ul className="profile__input-list">
+            <li className="profile__input-wrapper">
+              <div className="profile__input-field">
+                <label className="profile__label" htmlFor="name">Имя</label>
+                <input
+                  className='profile__input'
+                  type='text'
+                  required
+                  minLength='6'
+                  maxLength='25'
+                  name='name'
+                  value={values.name || currentUser.name}
+                  onChange={handleChange}
+                  id="name"
+                />
+              </div>
+              <span className="profile__input-error">
+                {errors.name}
+              </span>
+            </li>
+
+            <li className="profile__input-wrapper">
+              <div className="profile__input-field">
+                <label className="profile__label" htmlFor="email">E-mail</label>
+                <input
+                  className='profile__input'
+                  type='email'
+                  required
+                  minLength='4'
+                  maxLength='35'
+                  name='email'
+                  value={values.email || currentUser.email}
+                  onChange={handleChange}
+                  id="email"
+                />
+              </div>
+              <span className="profile__input-error">
+                {errors.email}
+              </span>
+            </li>
+          </ul>
           <span className={`proile__success-message 
-          ${onEditSuccess && "proile__success-message_active"}`}>
-            Успешно!
+          ${showMessage && "proile__success-message_active"}`}>
+            {onEditSuccess
+              ? "Успешно!"
+              : "Не удалось отредактировать данные. Возможно, пользователь с таким именем и E-mail уже существует"}
           </span>
           <button
-            className={`profile__button ${isValid
+            className={`profile__button ${isValid && !onEditSuccess
               ? "profile__button_active"
               : ""}`}
-            disabled={isValid === false && true}
+            disabled={isValid && onEditSuccess}
             type='submit'>
             Редактировать
           </button>
