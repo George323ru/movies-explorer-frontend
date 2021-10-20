@@ -1,7 +1,6 @@
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-
 import Preloader from "./Preloader/Preloader";
 import searchFilm from "../../utils/searchFilm";
 import filterShotFilms from "../../utils/filterShotFilms";
@@ -9,13 +8,13 @@ import checkFilmLike from "../../utils/checkFilmLike";
 import { useEffect, useState } from "react";
 
 const Movies = ({
-  movies,  
+  movies,
   handleSaveMovie,
   handleDeleteMovie,
   savedMovies,
   onLoading,
 }) => {
- 
+
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false);
   const [isSearchActiv, setIsSearchActiv] = useState(false)
@@ -39,7 +38,7 @@ const Movies = ({
     if (movieInput === "") {
       return null;
     } else {
-      
+
       if (isCheckboxShortFilm) {
         filterShotFilms(movies);
       }
@@ -68,16 +67,16 @@ const Movies = ({
     const storageFilm = JSON.parse(localStorage.getItem("saveMovies"));
 
     if (moviesSearch !== null) {
- 
+
       const shotrFilms = filterShotFilms(moviesSearch);
 
-      let filterMovies 
+      let filterMovies
 
-       if(isCheckboxShortFilm === true ) {
+      if (isCheckboxShortFilm === true) {
         filterMovies = shotrFilms
-       } else{
+      } else {
         filterMovies = searchFilm(movies, movieInput);
-       }
+      }
 
       if (moviesSearch) {
         setMoviesSearch(filterMovies);
@@ -96,7 +95,7 @@ const Movies = ({
           <Preloader />
         ) : (
           <MoviesCardList
-            movies={moviesSearch}            
+            movies={moviesSearch}
             isSearchActiv={isSearchActiv}
             isLoadingFilmSuccess={isLoadingFilmSuccess}
             handleSaveMovie={handleSaveMovie}

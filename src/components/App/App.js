@@ -23,7 +23,7 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const[isEditSuccess, setIsEditSuccess] = useState(false);
+  const [isEditSuccess, setIsEditSuccess] = useState(false);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const history = useHistory();
 
@@ -92,7 +92,7 @@ const App = () => {
 
   };
 
-  
+
   useEffect(() => {
     setIsLoading(true)
     moviesApi
@@ -107,10 +107,10 @@ const App = () => {
       });
   }, []);
 
-  const handleUpdateUserInfo = (data) => {
-
+  const handleUpdateUserInfo = (name, email) => {
+    console.log(name, email)
     mainApi
-      .updateUserInfo(data)
+      .updateUserInfo(name, email)
       .then((res) => {
         setCurrentUser(res)
         setIsEditSuccess(true)
@@ -119,7 +119,8 @@ const App = () => {
         console.log("Ошибка при отправке новых данных о пользователе, " + err))
   };
 
-  const handleEditInfoUserMessage = () =>{
+
+  const handleEditInfoUserMessage = () => {
     setIsEditSuccess(false)
   }
 
@@ -171,11 +172,11 @@ const App = () => {
         setSavedMovies([res, ...savedMovies])
       })
   }
-console.log(savedMovies)
+
   const handleDeleteMovie = ({ nameRU }) => {
     console.log(nameRU)
     let movieId = savedMovies.find((item) => item.nameRU === nameRU)
-    
+
     mainApi
       .deleteMovie({ movieId })
       .then((res) => {

@@ -5,7 +5,7 @@ import useFormWithValidation from "../../utils/useFormWithValidation";
 import "./Profile.css";
 import "./_active/profile__button_active.css"
 
-const Profile = ({ handleUpdateUserInfo, 
+const Profile = ({ handleUpdateUserInfo,
   handleLogOut,
   onEditSuccess,
   onEditInfoUserMessage }) => {
@@ -21,10 +21,17 @@ const Profile = ({ handleUpdateUserInfo,
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleUpdateUserInfo(values)
+    if (values.name === undefined) {
+      handleUpdateUserInfo(currentUser.name, values.email)
+    } else if (values.email === undefined) {
+      handleUpdateUserInfo(values.name, currentUser.email)
+    } else {
+      handleUpdateUserInfo(values.name, values.email)
+    }
+
   }
 
-  useEffect(() => {}, [currentUser]);
+  useEffect(() => { }, [currentUser]);
   useEffect(() => {
     onEditInfoUserMessage()
   }, [values]);
@@ -44,7 +51,7 @@ const Profile = ({ handleUpdateUserInfo,
                 required
                 minLength='6'
                 maxLength='25'
-                name='name'                
+                name='name'
                 value={values.name || currentUser.name}
                 onChange={handleChange}
                 id="name"
@@ -82,7 +89,7 @@ const Profile = ({ handleUpdateUserInfo,
               ? "profile__button_active"
               : ""}`}
             disabled={isValid === false && true}
-            type='submit'>              
+            type='submit'>
             Редактировать
           </button>
           <Link className='profile__link-logout' to='/sign-up'

@@ -33,8 +33,7 @@ class MainApi {
     }).then(this._checkingResponse);
   }
 
-  updateUserInfo(data) {
-    const { name, email } = data;
+  updateUserInfo(name, email) {
 
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
