@@ -16,6 +16,7 @@ import * as auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
+import PopupInfoTooltip from "../PopupInfoTooltip/PopupInfoTooltip";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -25,6 +26,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditSuccess, setIsEditSuccess] = useState(false);
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
+  const [isInfoTooltip, setIsInfoTooltip] = useState(false)
   const history = useHistory();
 
   const handleError = () => (err) => console.error(err);
@@ -196,6 +198,12 @@ const App = () => {
       })
   }
 
+  const closeAllPopups = () => {
+
+    setIsInfoTooltip(false);
+
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
@@ -249,6 +257,11 @@ const App = () => {
               : <Redirect to="/" />}
           </Route>
         </Switch>
+        <PopupInfoTooltip
+
+          isOpen={isInfoTooltip}
+          onClose={closeAllPopups}
+        />
 
         <Footer />
       </div>
