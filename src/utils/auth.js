@@ -1,6 +1,9 @@
 export const BASE_URL = 'http://api.gusevgeorgiy.me.nomoredomains.club';
 
-const checkRes = (res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+const checkRes = (res) =>
+  res.ok
+    ? res.json()
+    : Promise.reject(`Ошибка: ${res.status}`)
 
 export function register(name, email, password) {
 

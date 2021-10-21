@@ -58,10 +58,19 @@ const App = () => {
     auth
       .register(name, email, password)
       .then((res) => {
+
         const { email, _id } = res;
-        setLoggedIn(true);
-        setCurrentUser(email, _id)
-        history.push("/movies");
+        auth.authorize(email, password)
+          .then((data) => {
+            if (data) {
+              localStorage.setItem("jwt", data.token);
+              mainApi.setItemToken(data.token)
+            }
+            setLoggedIn(true);
+            setCurrentUser(email, _id)
+            history.push("/movies");
+          })
+
       })
       .catch(handleError);
   };
@@ -129,6 +138,7 @@ const App = () => {
     if (loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
         .then(([userInfo, moviesInfo]) => {
+          console.log(userInfo, moviesInfo)
           setCurrentUser(userInfo);
           setSavedMovies(moviesInfo);
         })
