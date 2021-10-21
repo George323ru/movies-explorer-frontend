@@ -11,7 +11,7 @@ const AboutMe = () => {
             <div className="about-me__resume">
               <p className="about-me__name">Георгий</p>
               <p className="about-me__job">Фронтенд-разработчик, 32 года</p>
-              <p className="about-me__story">Учился год на фронтенд-разработчика в Яндекс.Практикуме. Сейчас ищу работу по этой специальности. Увлекаюсь когнитивыми науками, бегом и практиками осознанности. Работаю в типографии.</p>
+              <p className="about-me__story">Учился год на фронтенд-разработчика в Яндекс.Практикуме. Сейчас ищу работу по этой специальности. Увлекаюсь когнитивыми науками, бегом и практиками эффективного мышления. Работаю в типографии.</p>
             </div>
             <div className="about-me__links">
               <a className="about-me__link" href="https://ru-ru.facebook.com" target="_blank" rel="noreferrer">Facebook</a>

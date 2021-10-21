@@ -60,7 +60,6 @@ const App = () => {
     auth
       .register(name, email, password)
       .then((res) => {
-
         const { email, _id } = res;
         auth.authorize(email, password)
           .then((data) => {
@@ -72,9 +71,15 @@ const App = () => {
             setCurrentUser(email, _id)
             history.push("/movies");
           })
-
+          .catch((err) => {
+            setIsInfoTooltip(true)
+            handleError(err)
+          })
       })
-      .catch(handleError);
+      .catch((err) => {
+        setIsInfoTooltip(true)
+        handleError(err)
+      });
   };
 
   const handleLogin = ({ email, password }) => {
@@ -102,7 +107,6 @@ const App = () => {
     history.push("/");
 
   };
-
 
   useEffect(() => {
     setIsLoading(true)
