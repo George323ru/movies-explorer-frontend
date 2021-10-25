@@ -16,8 +16,7 @@ const PopupInfoTooltip = ({ isOpen, onClose }) => {
           popup__title_margin_top'>
             Что-то пошло не так!
             Возможно, пользователь с такими именем и E-mail уже существует.
-
-            Поробуйте еще раз.</h2>
+          </h2>
           <button
             onClick={onClose}
             className='popup__closeButton'
