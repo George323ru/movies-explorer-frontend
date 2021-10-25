@@ -57,6 +57,7 @@ const App = () => {
   };
 
   const handleRegister = ({ name, email, password }) => {
+    setIsLoading(true);
     auth
       .register(name, email, password)
       .then((res) => {
@@ -69,6 +70,7 @@ const App = () => {
             }
             setLoggedIn(true);
             setCurrentUser(email, _id)
+            setIsLoading(false);
             history.push("/movies");
           })
           .catch((err) => {
@@ -83,7 +85,7 @@ const App = () => {
   };
 
   const handleLogin = ({ email, password }) => {
-
+    setIsLoading(true);
     auth
       .authorize(email, password)
       .then((data) => {
@@ -92,6 +94,7 @@ const App = () => {
           localStorage.setItem("jwt", data.token);
           mainApi.setItemToken(data.token)
         }
+        setIsLoading(false);
         setLoggedIn(true);
         history.push("/movies");
       })
