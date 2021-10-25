@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.gusevgeorgiy.me.nomoredomains.club';
+export const BASE_URL = 'https://api.gusevgeorgiy.me.nomoredomains.club';
 
 const checkRes = (res) =>
   res.ok

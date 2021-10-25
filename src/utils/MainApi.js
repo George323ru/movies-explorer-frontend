@@ -1,5 +1,5 @@
 const mainApiConfig = {
-  baseUrl: "http://api.gusevgeorgiy.me.nomoredomains.club",
+  baseUrl: "https://api.gusevgeorgiy.me.nomoredomains.club",
   token: ""
 }
 
