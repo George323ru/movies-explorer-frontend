@@ -11,7 +11,7 @@ const SavedMovies = ({ handleSaveMovie,
   savedMovies,
   isLoadingFilmSuccess,
 }) => {
-console.log(savedMovies)
+
   const [movieInput, setMovieInput] = useState("");
   const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false);
   const [movies, setMovies] = useState([]);
@@ -19,7 +19,7 @@ console.log(savedMovies)
 
   const getMovieSearchInput = (dataInput) => {
     setMovieInput(dataInput.toLowerCase())
-    
+
   }
 
   const handleCheckboxShortFilm = () => {
@@ -28,9 +28,9 @@ console.log(savedMovies)
       : setIsCheckboxShortFilm(true)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsSearchActiv(true)
-  },[])
+  }, [])
 
   useEffect(() => {
     setMovies(savedMovies)
@@ -42,7 +42,7 @@ console.log(savedMovies)
     if (movieInput === "") {
       return null;
     } else {
-      
+
       if (isCheckboxShortFilm) {
         filterShotFilms(savedMovies)
       }
