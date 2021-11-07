@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const MoviesCardList = ({
   onLoading,
-  movies,
+  moviesSearch,
   isSearchActiv,
   isLoadingFilmSuccess,
   handleSaveMovie,
@@ -40,7 +40,7 @@ const MoviesCardList = ({
   const showMoreCards = () => {
     setCardsLimit((i) => i + countAddCard);
   };
-
+  console.log(onLoading)
   return (
     <>
       {onLoading ? (
@@ -49,10 +49,10 @@ const MoviesCardList = ({
         {isLoadingFilmSuccess ? (
           <>
             {isSearchActiv ? (
-              movies.length > 0 ? (
+              moviesSearch.length > 0 ? (
                 <>
                   <ul className="movies-card-list__container">
-                    {movies
+                    {moviesSearch
                       .map((movie, id) => (
                         <Card
                           key={id}
@@ -64,7 +64,7 @@ const MoviesCardList = ({
                       .slice(0, cardsLimit)}
                   </ul>
                   <div className="movies-card-list__pagination">
-                    {cardsLimit < movies.length && (
+                    {cardsLimit < moviesSearch.length && (
                       <button
                         className="movies-card-list__append-button"
                         onClick={showMoreCards}

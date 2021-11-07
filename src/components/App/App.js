@@ -22,7 +22,6 @@ import Preloader from "../Movies/Preloader/Preloader";
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditSuccess, setIsEditSuccess] = useState(false);
@@ -119,21 +118,6 @@ const App = () => {
     setLoggedIn(false);
     history.push("./");
   };
-
-  useEffect(() => {
-
-
-    moviesApi
-      .getBeatFilmMovies()
-      .then((films) => {
-        setMovies(films);
-      })
-      .catch((err) => {
-
-        handleError(err);
-        setIsLoadingFilmSuccess(false);
-      });
-  }, []);
 
   const handleUpdateUserInfo = (name, email) => {
 
@@ -240,7 +224,6 @@ const App = () => {
                 path='/movies'
                 component={Movies}
                 loggedIn={loggedIn}
-                movies={movies}
                 onLoading={isLoading}
                 savedMovies={savedMovies}
                 handleError={handleError}

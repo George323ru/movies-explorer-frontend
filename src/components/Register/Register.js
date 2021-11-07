@@ -7,11 +7,9 @@ import "./Register.css";
 const Register = ({ handleRegister }) => {
 
   const {
-    values,
     handleChange,
     errors,
     isValid,
-    resetForm,
   } = useFormWithValidation();
 
   const [registerData, setRegisterData] = useState({ name: "", email: "", password: "" });

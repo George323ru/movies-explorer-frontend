@@ -6,17 +6,18 @@ import searchFilm from "../../utils/searchFilm";
 import filterShotFilms from "../../utils/filterShotFilms";
 import checkFilmLike from "../../utils/checkFilmLike";
 import { useEffect, useState } from "react";
+import moviesApi from "../../utils/MoviesApi";
 
 const Movies = ({
-  movies,
   handleSaveMovie,
   handleDeleteMovie,
   savedMovies,
-  onLoading,
+  onLoadingAllMovies
 }) => {
 
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const [isCheckboxShortFilm, setIsCheckboxShortFilm] = useState(false);
+  const [movies, setMovies] = useState([]);
   const [isSearchActiv, setIsSearchActiv] = useState(false)
   const [moviesSearch, setMoviesSearch] = useState([]);
   const [movieInput, setMovieInput] = useState("");
@@ -36,21 +37,38 @@ const Movies = ({
   };
 
   useEffect(() => {
-    setIsLoadingMovies(true)
+    console.log(movies)
+    isCheckboxShortFilm && filterShotFilms(movies);
+
+    const foundMovies = searchFilm(movies, movieInput);
+    const filteredFilm = checkFilmLike(foundMovies, savedMovies);
+    setMoviesSearch(filteredFilm);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movies])
+
+  useEffect(() => {
     if (movieInput === "") {
-      setIsLoadingMovies(false)
       return null;
     } else {
 
-      if (isCheckboxShortFilm) {
-        filterShotFilms(movies);
+      if (movies.length === 0) {
+        setIsLoadingMovies(true)
+        moviesApi
+          .getBeatFilmMovies()
+          .then((films) => {
+            setIsLoadingMovies(false)
+            setIsLoadingFilmSuccess(true)
+            setMovies(films);
+          })
+          .catch((err) => {
+            setIsLoadingMovies(false)
+            setIsLoadingFilmSuccess(false)
+            console.log(err)
+          });
       }
 
-      const foundMovies = searchFilm(movies, movieInput);
-      const filteredFilm = checkFilmLike(foundMovies, savedMovies);
-      setIsLoadingMovies(false)
-      setMoviesSearch(filteredFilm);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieInput]);
 
   useEffect(() => {
@@ -63,6 +81,7 @@ const Movies = ({
 
       localStorage.setItem("saveMovies", JSON.stringify(filteredFilm));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
 
   useEffect(() => {
@@ -79,22 +98,22 @@ const Movies = ({
         filterMovies = searchFilm(movies, movieInput);
       }
 
-      if (moviesSearch) {
-        setMoviesSearch(filterMovies);
-      }
+      moviesSearch && setMoviesSearch(filterMovies);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCheckboxShortFilm]);
 
   return (
     <section className="movies">
       <div className="movies__container">
         <SearchForm
+          onLoadingAllMovies={onLoadingAllMovies}
           handleSearchInput={getMovieSearchInput}
           handleCheckboxShortFilm={handleCheckboxShortFilm}
         />
         <MoviesCardList
           onLoading={isLoadingMovies}
-          movies={moviesSearch}
+          moviesSearch={moviesSearch}
           isSearchActiv={isSearchActiv}
           isLoadingFilmSuccess={isLoadingFilmSuccess}
           handleSaveMovie={handleSaveMovie}

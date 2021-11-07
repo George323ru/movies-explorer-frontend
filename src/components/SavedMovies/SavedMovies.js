@@ -52,6 +52,7 @@ const SavedMovies = ({ handleSaveMovie,
       setMovies(foundMovies)
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieInput])
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const SavedMovies = ({ handleSaveMovie,
 
     setMovies(filterMovies)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCheckboxShortFilm]);
 
   return (

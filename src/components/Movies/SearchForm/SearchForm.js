@@ -7,18 +7,18 @@ const SearchForm = ({
   handleSearchInput,
   handleCheckboxShortFilm }) => {
 
-    const [movieInputSearch, setMovieInputSearch] = useState(" ");
-    const [errorMessage, setErrorMessage] = useState("")
+  const [movieInputSearch, setMovieInputSearch] = useState(" ");
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-if(movieInputSearch === " " ){
-  setErrorMessage("Нужно ввести ключевое слово")    
-  } else {
-    handleSearchInput(movieInputSearch)
-    setErrorMessage("")
-  }
+
+    if (movieInputSearch === " ") {
+      setErrorMessage("Нужно ввести ключевое слово")
+    } else {
+      handleSearchInput(movieInputSearch)
+      setErrorMessage("")
+    }
   };
 
   return (
@@ -32,7 +32,7 @@ if(movieInputSearch === " " ){
           placeholder="Фильм"
           name="movieSearchInput"
           value={movieInputSearch}
-          onChange={(e) => setMovieInputSearch(e.target.value)}         
+          onChange={(e) => setMovieInputSearch(e.target.value)}
           required />
         <button
           className="search-form__button"

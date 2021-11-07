@@ -5,11 +5,9 @@ import "./Login.css";
 
 const Login = ({ handleLogin }) => {
   const {
-    values,
     handleChange,
     errors,
     isValid,
-    resetForm,
   } = useFormWithValidation();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
 

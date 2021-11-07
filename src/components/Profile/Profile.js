@@ -14,7 +14,6 @@ const Profile = ({ handleUpdateUserInfo,
     values,
     handleChange,
     errors,
-    isValid,
   } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
@@ -43,8 +42,8 @@ const Profile = ({ handleUpdateUserInfo,
         ? setIsDisableButton(true)
         : setIsDisableButton(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
-
 
   return (
     <section className="profile">
