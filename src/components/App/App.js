@@ -1,6 +1,6 @@
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import './App.css';
 import moviesApi from "../../utils/MoviesApi";
 import Header from '../Header/Header';
@@ -39,7 +39,7 @@ const App = () => {
   const checkToken = () => {
     setIsLoading(true);
     const jwt = localStorage.getItem("jwt");
-    console.log('check')
+
     if (jwt) {
       auth
         .checkToken(jwt)
@@ -48,7 +48,7 @@ const App = () => {
 
           setIsLoading(false);
           setLoggedIn(true);
-          // history.push("/movies");
+          // history.push("./movies");
         })
         .catch(handleError);
     } else {
@@ -72,7 +72,7 @@ const App = () => {
             setLoggedIn(true);
             setCurrentUser(email, _id)
             setIsLoading(false);
-            history.push("/movies");
+            history.push("./movies");
           })
           .catch((err) => {
             setIsInfoTooltip(true)
@@ -98,9 +98,14 @@ const App = () => {
         }
         setIsLoading(false);
         setLoggedIn(true);
-        history.push("/movies");
+        history.push("./movies");
       })
-      .catch(handleError);
+      .catch((err) => {
+        console.log(err)
+        setIsInfoTooltip(true)
+        handleError(err)
+      });
+
   };
 
   const handleLogOut = () => {
@@ -108,8 +113,9 @@ const App = () => {
     localStorage.removeItem("jwt");
     localStorage.removeItem("saveMovies");
     mainApi.removeItemToken();
-    history.push("/");
+
     setLoggedIn(false);
+    history.push("./");
   };
 
   useEffect(() => {
@@ -146,7 +152,7 @@ const App = () => {
 
 
   useEffect(() => {
-    console.log('mainApi')
+
     if (loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
         .then(([userInfo, moviesInfo]) => {
@@ -188,22 +194,20 @@ const App = () => {
         }
       )
       .then((res) => {
-        console.log(res)
+
         setIsLoadingFilmSuccess(true)
         setSavedMovies([res, ...savedMovies])
       })
   }
 
   const handleDeleteMovie = ({ nameRU }) => {
-    console.log(nameRU)
+
     let movieId = savedMovies.find((item) => item.nameRU === nameRU)
 
     mainApi
       .deleteMovie({ movieId })
       .then((res) => {
-        console.log(res)
         setSavedMovies(savedMovies.filter((item) => item._id !== movieId._id));
-        console.log(savedMovies)
       })
   }
 
@@ -222,11 +226,6 @@ const App = () => {
         <Switch>
           <Route exact path='/'>
             <Main />
-          </Route>
-          <Route exact path="/">
-            {!loggedIn
-              ? <Redirect to="/" />
-              : <Redirect to="/sign-in" />}
           </Route>
           <ProtectedRoute
             exact
@@ -256,23 +255,17 @@ const App = () => {
             handleUpdateUserInfo={handleUpdateUserInfo}
             handleLogOut={handleLogOut}>
           </ProtectedRoute>
-          <Route exact path='/sign-in'>
-            {!loggedIn
-              ? <Login handleLogin={handleLogin} />
-              : <Redirect to="/movies" />
-            }
-
-            {/* <Login handleLogin={handleLogin} /> */}
-          </Route>
           <Route exact path='/sign-up'>
-            {!loggedIn
-              ? <Register handleRegister={handleRegister} />
-              : <Redirect to="/movies" />
-            }
-            {/* <Register handleRegister={handleRegister} /> */}
+            <Register handleRegister={handleRegister} />
+          </Route>
+          <Route exact path='/sign-in'>
+            <Login handleLogin={handleLogin} />
           </Route>
           <Route path='*'>
             <NotFoundPage />
+          </Route>
+          <Route>
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
           </Route>
 
         </Switch>

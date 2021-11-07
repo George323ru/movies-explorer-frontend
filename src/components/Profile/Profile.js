@@ -107,7 +107,7 @@ const Profile = ({ handleUpdateUserInfo,
             type='submit'>
             Редактировать
           </button>
-          <Link className='profile__link-logout' to='/sign-up'
+          <Link className='profile__link-logout' to='/'
             onClick={handleLogOut}>
             Выйти из аккаунта
           </Link>
