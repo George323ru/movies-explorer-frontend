@@ -39,7 +39,7 @@ const App = () => {
   const checkToken = () => {
     setIsLoading(true);
     const jwt = localStorage.getItem("jwt");
-
+    console.log('check')
     if (jwt) {
       auth
         .checkToken(jwt)
@@ -48,7 +48,7 @@ const App = () => {
 
           setIsLoading(false);
           setLoggedIn(true);
-          history.push("/movies");
+          // history.push("/movies");
         })
         .catch(handleError);
     } else {
@@ -58,6 +58,7 @@ const App = () => {
 
   const handleRegister = ({ name, email, password }) => {
     setIsLoading(true);
+
     auth
       .register(name, email, password)
       .then((res) => {
@@ -86,6 +87,7 @@ const App = () => {
 
   const handleLogin = ({ email, password }) => {
     setIsLoading(true);
+
     auth
       .authorize(email, password)
       .then((data) => {
@@ -106,13 +108,13 @@ const App = () => {
     localStorage.removeItem("jwt");
     localStorage.removeItem("saveMovies");
     mainApi.removeItemToken();
-    setLoggedIn(false);
     history.push("/");
-
+    setLoggedIn(false);
   };
 
   useEffect(() => {
     setIsLoading(true)
+    console.log('moviesApi')
     moviesApi
       .getBeatFilmMovies()
       .then((films) => {
@@ -144,10 +146,10 @@ const App = () => {
 
 
   useEffect(() => {
+    console.log('mainApi')
     if (loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
         .then(([userInfo, moviesInfo]) => {
-          console.log(userInfo, moviesInfo)
           setCurrentUser(userInfo);
           setSavedMovies(moviesInfo);
         })
@@ -217,12 +219,17 @@ const App = () => {
       <div className="page">
         <Header isLogin={loggedIn} />
 
-
         <Switch>
           <Route exact path='/'>
             <Main />
           </Route>
+          <Route exact path="/">
+            {!loggedIn
+              ? <Redirect to="/" />
+              : <Redirect to="/sign-in" />}
+          </Route>
           <ProtectedRoute
+            exact
             path='/movies'
             component={Movies}
             loggedIn={loggedIn}
@@ -233,7 +240,7 @@ const App = () => {
             handleSaveMovie={handleSaveMovie}
             handleDeleteMovie={handleDeleteMovie}>
           </ProtectedRoute>
-          <ProtectedRoute path='/saved-movies'
+          <ProtectedRoute exact path='/saved-movies'
             component={SavedMovies}
             loggedIn={loggedIn}
             handleSaveMovie={handleSaveMovie}
@@ -241,7 +248,7 @@ const App = () => {
             savedMovies={savedMovies}
             isLoadingFilmSuccess={isLoadingFilmSuccess}>
           </ProtectedRoute>
-          <ProtectedRoute path='/profile'
+          <ProtectedRoute exact path='/profile'
             component={Profile}
             loggedIn={loggedIn}
             onEditSuccess={isEditSuccess}
@@ -249,23 +256,27 @@ const App = () => {
             handleUpdateUserInfo={handleUpdateUserInfo}
             handleLogOut={handleLogOut}>
           </ProtectedRoute>
-          <Route path='/sign-in'>
-            <Login handleLogin={handleLogin} />
+          <Route exact path='/sign-in'>
+            {!loggedIn
+              ? <Login handleLogin={handleLogin} />
+              : <Redirect to="/movies" />
+            }
+
+            {/* <Login handleLogin={handleLogin} /> */}
           </Route>
-          <Route path='/sign-up'>
-            <Register handleRegister={handleRegister} />
+          <Route exact path='/sign-up'>
+            {!loggedIn
+              ? <Register handleRegister={handleRegister} />
+              : <Redirect to="/movies" />
+            }
+            {/* <Register handleRegister={handleRegister} /> */}
           </Route>
           <Route path='*'>
             <NotFoundPage />
           </Route>
-          <Route path="/">
-            {loggedIn
-              ? <Redirect to="/movies" />
-              : <Redirect to="/" />}
-          </Route>
+
         </Switch>
         <PopupInfoTooltip
-
           isOpen={isInfoTooltip}
           onClose={closeAllPopups}
         />

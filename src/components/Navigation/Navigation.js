@@ -10,22 +10,23 @@ const Navigation = ({ isLogin }) => {
   const [clickMenuBurger, setClickMenuBurger] = useState(false);
   const { pathname } = useLocation();
 
-  const navLinksHidden = `${
-    pathname === "/sign-in" || pathname === "/sign-up"
+  const navLinksHidden = `${pathname === "/sign-in"
+      || pathname === "/sign-up"
       ? "navigation_hidden"
       : ""
-  }`;
+    }`;
 
   const handleClickMenuBurger = () => {
-    clickMenuBurger ? setClickMenuBurger(false) : setClickMenuBurger(true);
+    clickMenuBurger
+      ? setClickMenuBurger(false)
+      : setClickMenuBurger(true);
   };
 
   return (
     <nav className={`navigation ${navLinksHidden}`}>
       <div
-        className={`navigation__burger-button ${
-          !isLogin && "navigation_hidden"
-        } 
+        className={`navigation__burger-button ${!isLogin && "navigation_hidden"
+          } 
       `}
       >
         <input

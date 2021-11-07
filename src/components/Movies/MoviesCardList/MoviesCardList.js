@@ -38,7 +38,7 @@ const MoviesCardList = ({
   const showMoreCards = () => {
     setCardsLimit((i) => i + countAddCard);
   };
-  console.log(movies);
+
   return (
     <>
       {
@@ -61,7 +61,7 @@ const MoviesCardList = ({
                         .slice(0, cardsLimit)}
                     </ul>
                     <div className="movies-card-list__pagination">
-                      {cardsLimit <= movies.length && (
+                      {cardsLimit < movies.length && (
                         <button
                           className="movies-card-list__append-button"
                           onClick={showMoreCards}

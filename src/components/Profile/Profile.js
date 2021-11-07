@@ -19,6 +19,7 @@ const Profile = ({ handleUpdateUserInfo,
 
   const currentUser = useContext(CurrentUserContext);
   const [showMessage, setShowMessage] = useState(false)
+  const [isDisableButton, setIsDisableButton] = useState(true)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +37,14 @@ const Profile = ({ handleUpdateUserInfo,
   useEffect(() => {
     onEditInfoUserMessage()
     setShowMessage(false)
+
+    if (values.name !== undefined) {
+      values.name === currentUser.name
+        ? setIsDisableButton(true)
+        : setIsDisableButton(false)
+    }
   }, [values]);
+
 
   return (
     <section className="profile">
@@ -92,10 +100,10 @@ const Profile = ({ handleUpdateUserInfo,
               : "Не удалось отредактировать данные. Возможно, пользователь с таким именем и E-mail уже существует"}
           </span>
           <button
-            className={`profile__button ${isValid && !onEditSuccess
+            className={`profile__button ${!isDisableButton
               ? "profile__button_active"
               : ""}`}
-            disabled={isValid && onEditSuccess}
+            disabled={isDisableButton}
             type='submit'>
             Редактировать
           </button>
