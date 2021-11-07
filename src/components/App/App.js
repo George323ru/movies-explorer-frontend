@@ -39,7 +39,7 @@ const App = () => {
   }, []);
 
   const checkToken = () => {
-
+    setIsLoading(true)
     const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
@@ -55,6 +55,7 @@ const App = () => {
         .catch(handleError);
     } else {
       setLoggedIn(false);
+      setIsLoading(false)
     }
   };
 
