@@ -1,8 +1,10 @@
 import "./MoviesCardList.css";
 import Card from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 import { useState } from "react";
 
 const MoviesCardList = ({
+  onLoading,
   movies,
   isSearchActiv,
   isLoadingFilmSuccess,
@@ -41,51 +43,53 @@ const MoviesCardList = ({
 
   return (
     <>
-      {
-        <section className="movies-card-list">
-          {isLoadingFilmSuccess ? (
-            <>
-              {isSearchActiv ? (
-                movies.length > 0 ? (
-                  <>
-                    <ul className="movies-card-list__container">
-                      {movies
-                        .map((movie, id) => (
-                          <Card
-                            key={id}
-                            movie={movie}
-                            handleSaveMovie={handleSaveMovie}
-                            handleDeleteMovie={handleDeleteMovie}
-                          />
-                        ))
-                        .slice(0, cardsLimit)}
-                    </ul>
-                    <div className="movies-card-list__pagination">
-                      {cardsLimit < movies.length && (
-                        <button
-                          className="movies-card-list__append-button"
-                          onClick={showMoreCards}
-                        >
-                          Еще
-                        </button>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <p className="movies-card-list__caption">Ничего не найдено</p>
-                )
+      {onLoading ? (
+        <Preloader />
+      ) : (< section className="movies-card-list">
+        {isLoadingFilmSuccess ? (
+          <>
+            {isSearchActiv ? (
+              movies.length > 0 ? (
+                <>
+                  <ul className="movies-card-list__container">
+                    {movies
+                      .map((movie, id) => (
+                        <Card
+                          key={id}
+                          movie={movie}
+                          handleSaveMovie={handleSaveMovie}
+                          handleDeleteMovie={handleDeleteMovie}
+                        />
+                      ))
+                      .slice(0, cardsLimit)}
+                  </ul>
+                  <div className="movies-card-list__pagination">
+                    {cardsLimit < movies.length && (
+                      <button
+                        className="movies-card-list__append-button"
+                        onClick={showMoreCards}
+                      >
+                        Еще
+                      </button>
+                    )}
+                  </div>
+                </>
               ) : (
-                ""
-              )}
-            </>
-          ) : (
-            <p className="movies-card-list__caption">
-              Во время запроса произошла ошибка. Возможно, проблема с
-              соединением или сервер недоступен. Подождите немного и попробуйте
-              ещё раз.
-            </p>
-          )}
-        </section>
+                <p className="movies-card-list__caption">Ничего не найдено</p>
+              )
+            ) : (
+              ""
+            )}
+          </>
+        ) : (
+          <p className="movies-card-list__caption">
+            Во время запроса произошла ошибка. Возможно, проблема с
+            соединением или сервер недоступен. Подождите немного и попробуйте
+            ещё раз.
+          </p>
+        )}
+      </section>)
+
       }
     </>
   );

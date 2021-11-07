@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import './App.css';
 import moviesApi from "../../utils/MoviesApi";
 import Header from '../Header/Header';
@@ -17,6 +17,7 @@ import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
 import PopupInfoTooltip from "../PopupInfoTooltip/PopupInfoTooltip";
+import Preloader from "../Movies/Preloader/Preloader";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -28,6 +29,7 @@ const App = () => {
   const [isLoadingFilmSuccess, setIsLoadingFilmSuccess] = useState(true);
   const [isInfoTooltip, setIsInfoTooltip] = useState(false)
   const history = useHistory();
+  const { pathname } = useLocation();
 
   const handleError = () => (err) => console.error(err);
 
@@ -37,7 +39,7 @@ const App = () => {
   }, []);
 
   const checkToken = () => {
-    setIsLoading(true);
+    setIsLoading(true)
     const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
@@ -46,9 +48,9 @@ const App = () => {
         .then(() => {
           mainApi.setItemToken(jwt);
 
-          setIsLoading(false);
           setLoggedIn(true);
-          // history.push("./movies");
+          setIsLoading(false)
+          history.push(pathname);
         })
         .catch(handleError);
     } else {
@@ -57,7 +59,6 @@ const App = () => {
   };
 
   const handleRegister = ({ name, email, password }) => {
-    setIsLoading(true);
 
     auth
       .register(name, email, password)
@@ -71,7 +72,7 @@ const App = () => {
             }
             setLoggedIn(true);
             setCurrentUser(email, _id)
-            setIsLoading(false);
+
             history.push("./movies");
           })
           .catch((err) => {
@@ -86,7 +87,7 @@ const App = () => {
   };
 
   const handleLogin = ({ email, password }) => {
-    setIsLoading(true);
+
 
     auth
       .authorize(email, password)
@@ -96,12 +97,12 @@ const App = () => {
           localStorage.setItem("jwt", data.token);
           mainApi.setItemToken(data.token)
         }
-        setIsLoading(false);
+
         setLoggedIn(true);
         history.push("./movies");
       })
       .catch((err) => {
-        console.log(err)
+
         setIsInfoTooltip(true)
         handleError(err)
       });
@@ -119,22 +120,22 @@ const App = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true)
-    console.log('moviesApi')
+
+
     moviesApi
       .getBeatFilmMovies()
       .then((films) => {
         setMovies(films);
       })
       .catch((err) => {
-        setIsLoading(false)
+
         handleError(err);
         setIsLoadingFilmSuccess(false);
       });
   }, []);
 
   const handleUpdateUserInfo = (name, email) => {
-    console.log(name, email)
+
     mainApi
       .updateUserInfo(name, email)
       .then((res) => {
@@ -158,6 +159,7 @@ const App = () => {
         .then(([userInfo, moviesInfo]) => {
           setCurrentUser(userInfo);
           setSavedMovies(moviesInfo);
+
         })
         .catch((err) => console.log("Ошибка при получении данных, " + err));
     }
@@ -220,62 +222,69 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
-      <div className="page">
-        <Header isLogin={loggedIn} />
+      {isLoading
+        ? (
+          <Preloader />
+        )
+        : (
+          <div className="page">
+            <Header isLogin={loggedIn} />
 
-        <Switch>
-          <Route exact path='/'>
-            <Main />
-          </Route>
-          <ProtectedRoute
-            exact
-            path='/movies'
-            component={Movies}
-            loggedIn={loggedIn}
-            movies={movies}
-            onLoading={isLoading}
-            savedMovies={savedMovies}
-            handleError={handleError}
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}>
-          </ProtectedRoute>
-          <ProtectedRoute exact path='/saved-movies'
-            component={SavedMovies}
-            loggedIn={loggedIn}
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}
-            savedMovies={savedMovies}
-            isLoadingFilmSuccess={isLoadingFilmSuccess}>
-          </ProtectedRoute>
-          <ProtectedRoute exact path='/profile'
-            component={Profile}
-            loggedIn={loggedIn}
-            onEditSuccess={isEditSuccess}
-            onEditInfoUserMessage={handleEditInfoUserMessage}
-            handleUpdateUserInfo={handleUpdateUserInfo}
-            handleLogOut={handleLogOut}>
-          </ProtectedRoute>
-          <Route exact path='/sign-up'>
-            <Register handleRegister={handleRegister} />
-          </Route>
-          <Route exact path='/sign-in'>
-            <Login handleLogin={handleLogin} />
-          </Route>
-          <Route path='*'>
-            <NotFoundPage />
-          </Route>
-          <Route>
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
-          </Route>
+            <Switch>
+              <Route exact path='/'>
+                <Main />
+              </Route>
+              <ProtectedRoute
+                exact
+                path='/movies'
+                component={Movies}
+                loggedIn={loggedIn}
+                movies={movies}
+                onLoading={isLoading}
+                savedMovies={savedMovies}
+                handleError={handleError}
+                handleSaveMovie={handleSaveMovie}
+                handleDeleteMovie={handleDeleteMovie}>
+              </ProtectedRoute>
+              <ProtectedRoute exact path='/saved-movies'
+                component={SavedMovies}
+                loggedIn={loggedIn}
+                handleSaveMovie={handleSaveMovie}
+                handleDeleteMovie={handleDeleteMovie}
+                savedMovies={savedMovies}
+                isLoadingFilmSuccess={isLoadingFilmSuccess}>
+              </ProtectedRoute>
+              <ProtectedRoute exact path='/profile'
+                component={Profile}
+                loggedIn={loggedIn}
+                onEditSuccess={isEditSuccess}
+                onEditInfoUserMessage={handleEditInfoUserMessage}
+                handleUpdateUserInfo={handleUpdateUserInfo}
+                handleLogOut={handleLogOut}>
+              </ProtectedRoute>
+              <Route exact path='/sign-up'>
+                <Register handleRegister={handleRegister} />
+              </Route>
+              <Route exact path='/sign-in'>
+                <Login handleLogin={handleLogin} />
+              </Route>
+              <Route path='*'>
+                <NotFoundPage />
+              </Route>
+              <Route>
+                {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+              </Route>
 
-        </Switch>
-        <PopupInfoTooltip
-          isOpen={isInfoTooltip}
-          onClose={closeAllPopups}
-        />
+            </Switch>
+            <PopupInfoTooltip
+              isOpen={isInfoTooltip}
+              onClose={closeAllPopups}
+            />
 
-        <Footer />
-      </div>
+            <Footer />
+          </div>
+        )}
+
     </CurrentUserContext.Provider>
   );
 }

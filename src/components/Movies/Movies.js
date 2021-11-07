@@ -1,7 +1,7 @@
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import Preloader from "./Preloader/Preloader";
+
 import searchFilm from "../../utils/searchFilm";
 import filterShotFilms from "../../utils/filterShotFilms";
 import checkFilmLike from "../../utils/checkFilmLike";
@@ -20,6 +20,7 @@ const Movies = ({
   const [isSearchActiv, setIsSearchActiv] = useState(false)
   const [moviesSearch, setMoviesSearch] = useState([]);
   const [movieInput, setMovieInput] = useState("");
+  const [isLoadingMovies, setIsLoadingMovies] = useState(false);
 
   const getMovieSearchInput = (dataInput) => {
     if (dataInput !== undefined) {
@@ -35,7 +36,9 @@ const Movies = ({
   };
 
   useEffect(() => {
+    setIsLoadingMovies(true)
     if (movieInput === "") {
+      setIsLoadingMovies(false)
       return null;
     } else {
 
@@ -45,13 +48,12 @@ const Movies = ({
 
       const foundMovies = searchFilm(movies, movieInput);
       const filteredFilm = checkFilmLike(foundMovies, savedMovies);
-
+      setIsLoadingMovies(false)
       setMoviesSearch(filteredFilm);
     }
   }, [movieInput]);
 
   useEffect(() => {
-    const storageFilm = JSON.parse(localStorage.getItem("saveMovies"));
 
     if (movies !== null) {
       const foundMovies = searchFilm(movies, movieInput);
@@ -64,7 +66,6 @@ const Movies = ({
   }, [savedMovies]);
 
   useEffect(() => {
-    const storageFilm = JSON.parse(localStorage.getItem("saveMovies"));
 
     if (moviesSearch !== null) {
 
@@ -91,17 +92,15 @@ const Movies = ({
           handleSearchInput={getMovieSearchInput}
           handleCheckboxShortFilm={handleCheckboxShortFilm}
         />
-        {onLoading ? (
-          <Preloader />
-        ) : (
-          <MoviesCardList
-            movies={moviesSearch}
-            isSearchActiv={isSearchActiv}
-            isLoadingFilmSuccess={isLoadingFilmSuccess}
-            handleSaveMovie={handleSaveMovie}
-            handleDeleteMovie={handleDeleteMovie}
-          />
-        )}
+        <MoviesCardList
+          onLoading={isLoadingMovies}
+          movies={moviesSearch}
+          isSearchActiv={isSearchActiv}
+          isLoadingFilmSuccess={isLoadingFilmSuccess}
+          handleSaveMovie={handleSaveMovie}
+          handleDeleteMovie={handleDeleteMovie}
+        />
+
       </div>
     </section>
   );
