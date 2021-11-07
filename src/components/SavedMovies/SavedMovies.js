@@ -75,7 +75,7 @@ const SavedMovies = ({ handleSaveMovie,
         handleSearchInput={getMovieSearchInput}
         handleCheckboxShortFilm={handleCheckboxShortFilm} />
       <MoviesCardList
-        movies={movies}
+        moviesSearch={movies}
         isSearchActiv={isSearchActiv}
         handleSaveMovie={handleSaveMovie}
         handleDeleteMovie={handleDeleteMovie}
