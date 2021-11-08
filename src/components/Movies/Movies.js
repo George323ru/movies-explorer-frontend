@@ -24,6 +24,7 @@ const Movies = ({
   const [isLoadingMovies, setIsLoadingMovies] = useState(false);
 
   const getMovieSearchInput = (dataInput) => {
+    console.log(dataInput)
     if (dataInput !== undefined) {
       setMovieInput(dataInput.toLowerCase());
       setIsSearchActiv(true)
@@ -44,7 +45,7 @@ const Movies = ({
     const filteredFilm = checkFilmLike(foundMovies, savedMovies);
     setMoviesSearch(filteredFilm);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [movies])
+  }, [movies, movieInput])
 
   useEffect(() => {
     if (movieInput === "") {
@@ -56,9 +57,11 @@ const Movies = ({
         moviesApi
           .getBeatFilmMovies()
           .then((films) => {
+            console.log(films)
             setIsLoadingMovies(false)
             setIsLoadingFilmSuccess(true)
             setMovies(films);
+
           })
           .catch((err) => {
             setIsLoadingMovies(false)
@@ -79,7 +82,6 @@ const Movies = ({
 
       setMoviesSearch(filteredFilm);
 
-      localStorage.setItem("saveMovies", JSON.stringify(filteredFilm));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
