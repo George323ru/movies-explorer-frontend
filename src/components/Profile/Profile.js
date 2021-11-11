@@ -30,6 +30,7 @@ const Profile = ({ handleUpdateUserInfo,
       handleUpdateUserInfo(values.name, values.email)
     }
     setShowMessage(true)
+    setIsDisableButton(true)
   }
 
   useEffect(() => { }, [currentUser]);
